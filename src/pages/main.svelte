@@ -2,32 +2,55 @@
   import { Button } from '$lib/components/ui/button';
   import * as Card from '$lib/components/ui/card';
   import * as Command from '$lib/components/ui/command';
+  import { dailyStore } from '$src/stores/daily-store.svelte';
+  import { useSearchParams } from '$src/utils/useSearchParams.svelte';
+  import RectangularMonsterShowcase from '../componentes/RectangularMonsterShowcase.svelte';
   import monsters from '../data/monsters.json';
+  import { dayjs } from '../utils/dayjs';
+
+  const { handleGuess } = dailyStore;
+
+  const dateFormat = 'DDMMYYYY';
+  const urlDate = useSearchParams('date', dayjs.utc().format(dateFormat));
+
+  const gameDate = $derived(
+    dayjs.utc($urlDate, dateFormat).isValid()
+      ? dayjs.utc($urlDate, dateFormat)
+      : dayjs.utc()
+  );
+
+  const isPastDate = $derived(gameDate.isBefore(dayjs.utc(), 'day'));
+
+  let attempts = $derived(
+    dailyStore.state.current[gameDate.format(dateFormat)]?.attempts ?? []
+  );
+  let scored = $derived(
+    dailyStore.state.current[gameDate.format(dateFormat)]?.completed ?? false
+  );
 
   let search = $state('');
-  let attempts = $state<number[]>([]);
-  let scored = $state(false);
 
   let filtered = $derived(
     monsters
       .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
       .slice(0, 6)
   );
-
-  function handleGuess(selectID: number) {
-    if (scored) return;
-
-    attempts.push(selectID);
-
-    if (selectID === 1001) {
-      scored = true;
-    }
-    search = '';
-  }
 </script>
 
 <main class="h-screen">
   <div class="flex flex-col items-center justify-center gap-6 p-4">
+    {#if isPastDate}
+      <Card.Root>
+        <Card.Content class="px-8 text-center">
+          <span>
+            You playing the game of the day <b
+              >{gameDate.format('DD/MM/YYYY')}</b
+            >
+          </span>
+        </Card.Content>
+      </Card.Root>
+    {/if}
+
     <Card.Root>
       <Card.Content class="px-8 text-center">
         <h2>Can you guess the monster of the day?</h2>
@@ -49,7 +72,13 @@
           {#if search.trim().length > 0 && filtered.length > 0}
             <Command.Group>
               {#each filtered as monster (monster.id)}
-                <Command.Item onSelect={() => handleGuess(monster.id)}>
+                <Command.Item
+                  onSelect={() =>
+                    handleGuess(gameDate, {
+                      id: monster.id,
+                      name: monster.name,
+                    })}
+                >
                   <span>{monster.name}</span>
                 </Command.Item>
               {/each}
@@ -60,9 +89,11 @@
         </Command.List>
       </Command.Root>
 
-      {#each attempts as monsterID}
-        <span>{monsterID}</span>
-      {/each}
+      <div class="">
+        {#each attempts as monster}
+          <RectangularMonsterShowcase id={monster.id} name={monster.name} />
+        {/each}
+      </div>
     </div>
   </div>
 </main>

@@ -1,4 +1,5 @@
 import path from 'node:path';
+import { enhancedImages } from '@sveltejs/enhanced-img';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
@@ -11,5 +12,5 @@ export default defineConfig({
       $src: path.resolve('./src'),
     },
   },
-  plugins: [tailwindcss(), svelte()],
+  plugins: [tailwindcss(), enhancedImages(), svelte()],
 });
