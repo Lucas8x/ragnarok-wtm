@@ -18,18 +18,16 @@
       ? dayjs.utc($urlDate, dateFormat)
       : dayjs.utc()
   );
-
   const isPastDate = $derived(gameDate.isBefore(dayjs.utc(), 'day'));
-
+  const dateGameKey = $derived(gameDate.format(dateFormat));
   let attempts = $derived(
-    dailyStore.state.current[gameDate.format(dateFormat)]?.attempts ?? []
+    dailyStore.state.current[dateGameKey]?.attempts ?? []
   );
   let scored = $derived(
-    dailyStore.state.current[gameDate.format(dateFormat)]?.completed ?? false
+    dailyStore.state.current[dateGameKey]?.completed ?? false
   );
 
   let search = $state('');
-
   let filtered = $derived(
     monsters
       .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
@@ -73,11 +71,13 @@
             <Command.Group>
               {#each filtered as monster (monster.id)}
                 <Command.Item
-                  onSelect={() =>
-                    handleGuess(gameDate, {
+                  onSelect={() => {
+                    handleGuess(dateGameKey, {
                       id: monster.id,
                       name: monster.name,
-                    })}
+                    });
+                    search = '';
+                  }}
                 >
                   <span>{monster.name}</span>
                 </Command.Item>

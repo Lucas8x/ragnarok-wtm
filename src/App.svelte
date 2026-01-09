@@ -20,7 +20,7 @@
   <title>{$_(titles[$route])} - Ragnarok</title>
 </svelte:head>
 
-<main class="bg-slate-100 h-screen">
+<main class="bg-slate-100 h-screen flex flex-col w-full">
   <NavigationBar />
 
   {#if $route === '/'}
@@ -33,5 +33,5 @@
     <Custom />
   {/if}
 
-  <Footer />
+  <!-- <Footer /> -->
 </main>
