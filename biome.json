@@ -47,6 +47,11 @@
       "indentScriptAndStyle": true
     }
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "assist": {
     "enabled": true,
     "actions": { "source": { "organizeImports": "on" } }
@@ -65,6 +70,9 @@
             "noUnusedImports": "off"
           }
         }
+      },
+      "formatter": {
+        "enabled": false
       }
     }
   ]
