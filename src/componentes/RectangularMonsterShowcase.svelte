@@ -6,8 +6,9 @@
   type Props = {
     id: number | string;
     name: string;
+    children?: any;
   };
-  let { id, name }: Props = $props();
+  let { id, name, children }: Props = $props();
 
   let imgSrc: string | null = $state(null);
   let isLoading: boolean = $state(true);
@@ -20,21 +21,25 @@
   });
 </script>
 
-<div class="flex items-center gap-2">
-  {#if imgSrc && !isLoading}
-    <enhanced:img class="size-12 object-contain" src={imgSrc} alt={name} />
-  {:else if isLoading}
-    <div class="bg-amber-500">Loading</div>
-  {:else}
-    <div
-      class="bg-red-500"
-      style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#666"
-    >
-      <span>No image</span>
-    </div>
-  {/if}
+<li class="neo-border flex items-center gap-2 bg-pink-400 p-2">
+  <Card.Root class="p-2">
+    <Card.Content class="px-1 py-4">
+      {#if imgSrc && !isLoading}
+        <enhanced:img class="size-12 object-contain" src={imgSrc} alt={name} />
+      {:else if isLoading}
+        <div class="bg-amber-500">Loading</div>
+      {:else}
+        <div
+          class="bg-red-500"
+          style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#666">
+          <span>?</span>
+        </div>
+      {/if}
+    </Card.Content>
+  </Card.Root>
 
-  <span>{name}</span>
-
-  <div></div>
-</div>
+  <div>
+    <span>{name}</span>
+    <div>attributes</div>
+  </div>
+</li>

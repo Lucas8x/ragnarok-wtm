@@ -20,18 +20,24 @@
   <title>{$_(titles[$route])} - Ragnarok</title>
 </svelte:head>
 
-<main class="bg-slate-100 h-screen flex flex-col w-full">
+<main
+  class="bg-orange-100 h-screen flex flex-col w-full antialiased font-sans bg-"
+>
   <NavigationBar />
 
-  {#if $route === '/'}
-    <Home />
-  {:else if $route === '/connoisseur'}
-    <Connoisseur />
-  {:else if $route === '/wordle'}
-    <Wordle />
-  {:else if $route === '/custom'}
-    <Custom />
-  {/if}
+  <div class="flex h-full w-full justify-center">
+    <div class="max-w-xl w-full">
+      {#if $route === '/'}
+        <Home />
+      {:else if $route === '/connoisseur'}
+        <Connoisseur />
+      {:else if $route === '/wordle'}
+        <Wordle />
+      {:else if $route === '/custom'}
+        <Custom />
+      {/if}
+    </div>
+  </div>
 
   <!-- <Footer /> -->
 </main>
