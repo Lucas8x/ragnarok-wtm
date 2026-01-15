@@ -19,6 +19,13 @@
   --chart-4: #00d696;
   --chart-5: #7a83ff;
   --chart-active-dot: #000;
+
+  /* Neobrutalism colors */
+  --neo-yellow: oklch(0.9 0.18 95);
+  --neo-pink: oklch(0.8 0.15 350);
+  --neo-blue: oklch(0.7 0.15 250);
+  --neo-green: oklch(0.75 0.18 145);
+  --neo-orange: oklch(0.8 0.18 55);
 }
 
 .dark {
@@ -61,6 +68,12 @@
   --shadow-shadow: var(--shadow);
   --font-weight-base: 500;
   --font-weight-heading: 600;
+
+  --color-neo-yellow: var(--neo-yellow);
+  --color-neo-pink: var(--neo-pink);
+  --color-neo-blue: var(--neo-blue);
+  --color-neo-green: var(--neo-green);
+  --color-neo-orange: var(--neo-orange);
 }
 
 @layer base {
