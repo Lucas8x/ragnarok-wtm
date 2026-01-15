@@ -9,14 +9,18 @@
 
 <Card.Root class="w-full">
   <Card.Content class="px-4">
-    <div class="flex flex-col gap-4">
-      <h3 class="font-semibold">ATTEMPTS: {attempts.length}</h3>
+    {#if attempts.length === 0}
+      <div class="text-center">Your attempts you be show here.</div>
+    {:else}
+      <div class="flex flex-col gap-4">
+        <h3 class="font-semibold">ATTEMPTS: {attempts.length}</h3>
 
-      <ul class="space-y-2 overflow-y-auto max-h-80">
-        {#each attempts as monster}
-          <RectangularMonsterShowcase id={monster.id} name={monster.name} />
-        {/each}
-      </ul>
-    </div>
+        <ul class="max-h-80 space-y-2 overflow-y-auto">
+          {#each attempts as monster}
+            <RectangularMonsterShowcase id={monster.id} name={monster.name} />
+          {/each}
+        </ul>
+      </div>
+    {/if}
   </Card.Content>
 </Card.Root>
