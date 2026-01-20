@@ -1,10 +1,12 @@
 <script lang="ts">
   import * as Card from '$lib/components/ui/card';
   import { cn } from '$lib/utils';
+  import type { Monster } from '$src/@types';
   import { route } from '$src/stores/router';
   import RectangularMonsterShowcase from './RectangularMonsterShowcase.svelte';
 
-  let { attempts } = $props();
+  let { attempts, correctID }: { attempts: Monster[]; correctID?: number } =
+    $props();
 </script>
 
 <Card.Root class="w-full">
@@ -17,7 +19,10 @@
 
         <ul class="max-h-80 space-y-2 overflow-y-auto">
           {#each attempts as monster}
-            <RectangularMonsterShowcase id={monster.id} name={monster.name} />
+            <RectangularMonsterShowcase
+              id={monster.id}
+              name={monster.name}
+              {correctID} />
           {/each}
         </ul>
       </div>

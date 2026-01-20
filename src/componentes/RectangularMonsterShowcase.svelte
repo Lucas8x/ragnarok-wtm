@@ -1,15 +1,18 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import * as Card from '$lib/components/ui/card';
+  import { cn } from '$lib/utils.js';
   import { spritesImages } from '$src/utils';
 
   let {
     id,
     name,
+    correctID,
     children,
   }: {
     id: number | string;
     name: string;
+    correctID?: number;
     children?: unknown;
   } = $props();
 
@@ -24,7 +27,11 @@
   });
 </script>
 
-<li class="neo-border flex items-center gap-2 bg-pink-400 p-2">
+<li
+  class={cn('neo-border flex items-center gap-2 p-2', {
+    'bg-pink-400': id !== correctID,
+    'bg-green-400': id === correctID,
+  })}>
   <Card.Root class="p-2">
     <Card.Content class="px-1 py-4">
       {#if imgSrc && !isLoading}

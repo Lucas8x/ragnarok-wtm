@@ -66,5 +66,7 @@
     </Card.Content>
   </Card.Root>
 
-  <AttemptsShowcase {attempts} />
+  <AttemptsShowcase
+    {attempts}
+    correctID={dailyStore.state.current[dateGameKey].answerID} />
 </div>

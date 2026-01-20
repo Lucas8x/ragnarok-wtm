@@ -31,7 +31,7 @@
     <Command.List>
       {#if search.trim().length > 0 && filtered.length > 0}
         <Command.Group>
-          {#each filtered as monster (monster.id)}
+          {#each filtered as monster}
             <Command.Item onSelect={() => onSelect(monster.id, monster.name)}>
               <span>{monster.name}</span>
             </Command.Item>
