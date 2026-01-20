@@ -7,10 +7,9 @@
 
 <a
   {href}
-  class={cn('underline-offset-4 font-medium sm:text-base text-sm', {
+  class={cn('text-sm font-medium underline-offset-4 sm:text-base', {
     underline: $route === href,
     'font-bold': $route === href,
-  })}
->
+  })}>
   {@render children?.()}
 </a>

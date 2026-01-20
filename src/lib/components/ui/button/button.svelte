@@ -1,10 +1,10 @@
 <script lang="ts" module>
-  import { cn, type WithElementRef } from '$lib/utils.js';
   import type {
     HTMLAnchorAttributes,
     HTMLButtonAttributes,
   } from 'svelte/elements';
-  import { type VariantProps, tv } from 'tailwind-variants';
+  import { tv, type VariantProps } from 'tailwind-variants';
+  import { cn, type WithElementRef } from '$lib/utils.js';
 
   export const buttonVariants = tv({
     base: 'inline-flex items-center justify-center whitespace-nowrap rounded-base text-sm font-base ring-offset-white transition-all gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -15,6 +15,8 @@
         noShadow: 'text-main-foreground bg-main border-2 border-border',
         neutral:
           'bg-secondary-background text-foreground border-2 border-border shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none',
+        outline:
+          'bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 border shadow-xs',
         reverse:
           'text-main-foreground bg-main border-2 border-border hover:translate-x-reverseBoxShadowX hover:translate-y-reverseBoxShadowY hover:shadow-shadow',
       },
@@ -64,8 +66,7 @@
     aria-disabled={disabled}
     role={disabled ? 'link' : undefined}
     tabindex={disabled ? -1 : undefined}
-    {...restProps}
-  >
+    {...restProps}>
     {@render children?.()}
   </a>
 {:else}
@@ -75,8 +76,7 @@
     class={cn(buttonVariants({ variant, size }), className)}
     {type}
     {disabled}
-    {...restProps}
-  >
+    {...restProps}>
     {@render children?.()}
   </button>
 {/if}

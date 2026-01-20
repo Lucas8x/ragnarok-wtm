@@ -3,12 +3,15 @@
   import * as Card from '$lib/components/ui/card';
   import { spritesImages } from '$src/utils';
 
-  type Props = {
+  let {
+    id,
+    name,
+    children,
+  }: {
     id: number | string;
     name: string;
-    children?: any;
-  };
-  let { id, name, children }: Props = $props();
+    children?: unknown;
+  } = $props();
 
   let imgSrc: string | null = $state(null);
   let isLoading: boolean = $state(true);

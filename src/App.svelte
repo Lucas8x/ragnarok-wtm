@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ModeWatcher } from 'mode-watcher';
   import { _ } from 'svelte-i18n';
   import Footer from '$src/componentes/Footer.svelte';
   import NavigationBar from '$src/componentes/NavigationBar.svelte';
@@ -7,6 +8,7 @@
   import Home from '$src/pages/main.svelte';
   import Wordle from '$src/pages/wordle.svelte';
   import { route } from '$src/stores/router';
+  import ThemeSwitch from './componentes/ThemeSwitch.svelte';
 
   const titles: Record<string, string> = {
     '/': 'page_title',
@@ -21,12 +23,13 @@
 </svelte:head>
 
 <main
-  class="bg-orange-100 h-screen flex flex-col w-full antialiased font-sans bg-"
->
+  class="bg- flex h-screen w-full flex-col bg-orange-100 font-sans antialiased">
+  <ModeWatcher />
+
   <NavigationBar />
 
   <div class="flex h-full w-full justify-center">
-    <div class="max-w-xl w-full">
+    <div class="w-full max-w-xl">
       {#if $route === '/'}
         <Home />
       {:else if $route === '/connoisseur'}
@@ -40,4 +43,8 @@
   </div>
 
   <!-- <Footer /> -->
+
+  <div class="absolute right-2 bottom-2">
+    <ThemeSwitch />
+  </div>
 </main>
