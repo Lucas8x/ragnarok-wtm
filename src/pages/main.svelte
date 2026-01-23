@@ -57,8 +57,8 @@
       <h2>Can you guess the monster of the day?</h2>
 
       <PredictInput
+        bind:search
         {scored}
-        {search}
         onSelect={(id, name) => {
           handleGuess(dateGameKey, { id, name });
           search = '';
