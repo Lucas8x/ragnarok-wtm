@@ -18,7 +18,7 @@
         <h3 class="font-semibold">ATTEMPTS: {attempts.length}</h3>
 
         <ul class="max-h-80 space-y-2 overflow-y-auto">
-          {#each attempts as monster}
+          {#each attempts as monster, i (`${i}-${monster.id}`)}
             <RectangularMonsterShowcase
               id={monster.id}
               name={monster.name}
