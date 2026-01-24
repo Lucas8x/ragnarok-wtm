@@ -23,8 +23,7 @@
   onMount(async () => {
     const key = `/src/assets/sprites/${id}.png`;
     isLoading = true;
-    //imgSrc = await spritesImages[key]();
-    imgSrc = null;
+    imgSrc = await spritesImages[key]();
     isLoading = false;
   });
 </script>
@@ -33,7 +32,8 @@
   class={cn('neo-border flex items-center gap-2 p-2', {
     'bg-pink-400': id !== correctID,
     'bg-green-400': id === correctID,
-  })}>
+  })}
+>
   <Card.Root class="p-2">
     <Card.Content class="px-1 py-4">
       {#if imgSrc && !isLoading}
