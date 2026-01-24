@@ -18,13 +18,15 @@
 
   const { handleGuess } = dailyStore;
 
-  const gameDate = $derived(
+  let gameDate = $derived(
     dayjs.utc($urlDate, dateFormat).isValid()
       ? dayjs.utc($urlDate, dateFormat)
       : dayjs.utc(),
   );
-  const isPastDate = $derived(gameDate.isBefore(dayjs.utc(), 'day'));
-  const dateGameKey = $derived(gameDate.format(dateFormat));
+
+  let isPastDate = $derived(gameDate.isBefore(dayjs.utc(), 'day'));
+
+  let dateGameKey = $derived(gameDate.format(dateFormat));
   let attempts = $derived(
     dailyStore.state.current[dateGameKey]?.attempts ?? [],
   );
@@ -38,11 +40,11 @@
 <div class="flex w-full flex-col items-center justify-center gap-6 pt-4">
   {#if isPastDate}
     <Card.Root>
-      <Card.Content class="px-8 text-center">
-        <span>
-          You playing the game of the day <b>{gameDate.format('DD/MM/YYYY')}</b>
-        </span>
-      </Card.Content>
+      <Card.Content class="px-8 text-center"
+        ><span>
+          You playing the game of the day
+          <b>{gameDate.format('DD/MM/YYYY')}</b>
+        </span></Card.Content>
     </Card.Root>
   {/if}
 
