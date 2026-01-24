@@ -13,10 +13,10 @@
   import AttemptsShowcase from '../componentes/AttemptsShowcase.svelte';
   import { dayjs } from '../utils/dayjs';
 
-  const { handleGuess } = dailyStore;
-
   const dateFormat = 'DDMMYYYY';
   const urlDate = useSearchParams('date', dayjs.utc().format(dateFormat));
+
+  const { handleGuess } = dailyStore;
 
   const gameDate = $derived(
     dayjs.utc($urlDate, dateFormat).isValid()
@@ -54,7 +54,7 @@
         <span class="font-bold">Monster of the day</span>
       </div>
 
-      <h2>Can you guess the monster of the day?</h2>
+      <h2 class="text-lg font-bold">Can you guess the monster of the day?</h2>
 
       <PredictInput
         bind:search
