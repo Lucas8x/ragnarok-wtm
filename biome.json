@@ -59,6 +59,9 @@
   "overrides": [
     {
       "includes": ["**/*.svelte"],
+      "formatter": {
+        "enabled": false
+      },
       "linter": {
         "rules": {
           "style": {
@@ -70,9 +73,6 @@
             "noUnusedImports": "off"
           }
         }
-      },
-      "formatter": {
-        "enabled": false
       }
     }
   ]
