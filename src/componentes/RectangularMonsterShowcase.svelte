@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { LoaderCircle } from '@lucide/svelte/icons';
   import { onMount } from 'svelte';
   import * as Card from '$lib/components/ui/card';
   import { cn } from '$lib/utils.js';
@@ -22,7 +23,8 @@
   onMount(async () => {
     const key = `/src/assets/sprites/${id}.png`;
     isLoading = true;
-    imgSrc = await spritesImages[key]();
+    //imgSrc = await spritesImages[key]();
+    imgSrc = null;
     isLoading = false;
   });
 </script>
@@ -37,11 +39,9 @@
       {#if imgSrc && !isLoading}
         <enhanced:img class="size-12 object-contain" src={imgSrc} alt={name} />
       {:else if isLoading}
-        <div class="bg-amber-500">Loading</div>
+        <LoaderCircle class="not-motion-reduce:animate-spin" />
       {:else}
-        <div
-          class="bg-red-500"
-          style="width:100%;height:100%;background:#eee;display:flex;align-items:center;justify-content:center;color:#666">
+        <div class=" flex size-20 h-full w-full items-center justify-center">
           <span>?</span>
         </div>
       {/if}
