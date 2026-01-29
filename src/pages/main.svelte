@@ -40,11 +40,12 @@
 <div class="flex w-full flex-col items-center justify-center gap-6 pt-4">
   {#if isPastDate}
     <Card.Root>
-      <Card.Content class="px-8 text-center"
-        ><span>
+      <Card.Content class="px-8 text-center">
+        <span>
           You playing the game of the day
           <b>{gameDate.format('DD/MM/YYYY')}</b>
-        </span></Card.Content>
+        </span>
+      </Card.Content>
     </Card.Root>
   {/if}
 
@@ -61,8 +62,8 @@
       <PredictInput
         bind:search
         {scored}
-        onSelect={(id, name) => {
-          handleGuess(dateGameKey, { id, name });
+        onSelect={(id) => {
+          handleGuess(dateGameKey, id);
           search = '';
         }} />
     </Card.Content>
@@ -70,5 +71,5 @@
 
   <AttemptsShowcase
     {attempts}
-    correctID={dailyStore.state.current[dateGameKey].answerID} />
+    correctID={dailyStore.state.current[dateGameKey].answerID ?? -1} />
 </div>

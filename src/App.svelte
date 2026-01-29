@@ -44,7 +44,7 @@
 
   <!-- <Footer /> -->
 
-  <div class="absolute right-2 bottom-2">
+  <!-- <div class="absolute right-2 bottom-2">
     <ThemeSwitch />
-  </div>
+  </div> -->
 </main>

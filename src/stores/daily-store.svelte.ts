@@ -1,8 +1,7 @@
 import { PersistedState } from 'runed';
-import type { Monster } from '$src/@types';
 
 type DailyItem = {
-  attempts: Monster[];
+  attempts: number[];
   answerID?: number;
   completed: boolean;
 };
@@ -23,7 +22,7 @@ const state = new PersistedState<DailyStore>(
 export const dailyStore = {
   state,
 
-  handleGuess: (gameDate: string, monster: Monster) => {
+  handleGuess: (gameDate: string, monsterID: number) => {
     /* if (!state.current[gameDate]) {
       state.current[gameDate] = {
         attempts: [monster],
@@ -37,14 +36,14 @@ export const dailyStore = {
     }
 
     state.current[gameDate] = {
-      attempts: [monster, ...(state.current[gameDate]?.attempts || [])],
+      attempts: [monsterID, ...(state.current[gameDate]?.attempts || [])],
       answerID: undefined,
       completed: false,
     };
 
-    if (monster.id === 1001) {
+    if (monsterID === 1001) {
       state.current[gameDate].completed = true;
-      state.current[gameDate].answerID = monster.id;
+      state.current[gameDate].answerID = monsterID;
       return true;
     }
   },

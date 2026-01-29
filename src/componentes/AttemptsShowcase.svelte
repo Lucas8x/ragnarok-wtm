@@ -1,11 +1,11 @@
 <script lang="ts">
   import * as Card from '$lib/components/ui/card';
   import { cn } from '$lib/utils';
-  import type { Monster } from '$src/@types';
+  import monsters from '$src/data/monsters2.json';
   import { route } from '$src/stores/router';
   import RectangularMonsterShowcase from './RectangularMonsterShowcase.svelte';
 
-  let { attempts, correctID }: { attempts: Monster[]; correctID?: number } =
+  let { attempts, correctID }: { attempts: number[]; correctID: number } =
     $props();
 </script>
 
@@ -18,11 +18,8 @@
         <h3 class="font-semibold">ATTEMPTS: {attempts.length}</h3>
 
         <ul class="max-h-80 space-y-2 overflow-y-auto">
-          {#each attempts as monster, i (`${i}-${monster.id}`)}
-            <RectangularMonsterShowcase
-              id={monster.id}
-              name={monster.name}
-              {correctID} />
+          {#each attempts as monsterID, i (`${i}-${monsterID}`)}
+            <RectangularMonsterShowcase {monsterID} {correctID} />
           {/each}
         </ul>
       </div>

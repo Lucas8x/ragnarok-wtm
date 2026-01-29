@@ -11,7 +11,7 @@
   }: {
     scored: boolean;
     search: string;
-    onSelect: (id: number, name: string) => void;
+    onSelect: (id: number) => void;
   } = $props();
 
   let filtered = $derived(
@@ -32,7 +32,7 @@
       {#if search.trim().length > 0 && filtered.length > 0}
         <Command.Group>
           {#each filtered as monster}
-            <Command.Item onSelect={() => onSelect(monster.id, monster.name)}>
+            <Command.Item onSelect={() => onSelect(monster.id)}>
               <span>{monster.name}</span>
             </Command.Item>
           {/each}
