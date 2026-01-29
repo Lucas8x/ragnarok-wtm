@@ -1,31 +1,37 @@
 <script lang="ts">
-  import { ArrowDown, ArrowUp } from '@lucide/svelte/icons';
+  import { ArrowDown, ArrowUp, Check } from '@lucide/svelte/icons';
+  import * as Card from '$lib/components/ui/card';
   import { cn } from '$lib/utils';
+  import type { ComparasionIndicator } from '$src/@types';
 
   let {
     title,
     text,
-    correct,
-    greater,
-  }: { title: string; text: string; correct?: boolean; greater?: boolean } =
-    $props();
+    result,
+  }: {
+    title: string;
+    text: string;
+    result?: ComparasionIndicator;
+  } = $props();
 </script>
 
 <div
-  class={cn('flex flex-col text-center', {
-    'bg-red-500': false,
+  class={cn('neo-border flex items-center px-2 py-1 text-center', {
+    'bg-neo-red': result !== '=',
+    'bg-neo-green': result === '=',
   })}>
-  <span>{title}</span>
-
-  <div class="flex">
-    {#if !correct}
-      {#if greater}
-        <ArrowUp class="mx-auto mt-1 h-4 w-4" />
-      {:else}
-        <ArrowDown class="mx-auto mt-1 h-4 w-4" />
-      {/if}
+  {#if result !== '='}
+    {#if result === '>'}
+      <ArrowUp class="size-5" />
+    {:else}
+      <ArrowDown class="size-5" />
     {/if}
+  {:else}
+    <Check class="size-5" />
+  {/if}
 
+  <div class="flex flex-col leading-5">
+    <span>{title.toUpperCase()}</span>
     <span>{text}</span>
   </div>
 </div>

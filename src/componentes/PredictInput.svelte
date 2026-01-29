@@ -16,7 +16,9 @@
 
   let filtered = $derived(
     monsters
-      .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+      .filter((item) =>
+        item.name.toLowerCase().startsWith(search.toLowerCase()),
+      )
       .slice(0, 6),
   );
 </script>

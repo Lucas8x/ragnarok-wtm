@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import { PersistedState } from 'runed';
+import { getDailyMonsterID } from '$src/utils/prng';
 
 type DailyItem = {
   attempts: number[];
@@ -41,7 +43,7 @@ export const dailyStore = {
       completed: false,
     };
 
-    if (monsterID === 1001) {
+    if (monsterID === getDailyMonsterID(dayjs(gameDate).toDate())) {
       state.current[gameDate].completed = true;
       state.current[gameDate].answerID = monsterID;
       return true;

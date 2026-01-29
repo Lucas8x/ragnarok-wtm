@@ -50,9 +50,9 @@
     </Card.Content>
   </Card.Root>
 
-  <div class="flex flex-col gap-1">
+  <div class="flex flex-col gap-2">
     <div class="flex gap-2">
-      <p>{comparasion.attemptData.name}</p>
+      <p class="font-bold">{comparasion.attemptData.name}</p>
     </div>
     <PropertiesDisplay {comparasion} />
   </div>

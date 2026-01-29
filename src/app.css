@@ -26,6 +26,7 @@
   --neo-blue: oklch(0.7 0.15 250);
   --neo-green: oklch(0.75 0.18 145);
   --neo-orange: oklch(0.8 0.18 55);
+  --neo-red: oklch(0.75 0.18 25);
 }
 
 .dark {
@@ -74,6 +75,7 @@
   --color-neo-blue: var(--neo-blue);
   --color-neo-green: var(--neo-green);
   --color-neo-orange: var(--neo-orange);
+  --color-neo-red: var(--neo-red);
 }
 
 @layer base {

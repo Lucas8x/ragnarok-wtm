@@ -9,6 +9,7 @@
   import * as Card from '$lib/components/ui/card';
   import PredictInput from '$src/componentes/PredictInput.svelte';
   import { dailyStore } from '$src/stores/daily-store.svelte';
+  import { getDailyMonsterID } from '$src/utils/prng';
   import { useSearchParams } from '$src/utils/useSearchParams.svelte';
   import AttemptsShowcase from '../componentes/AttemptsShowcase.svelte';
   import { dayjs } from '../utils/dayjs';
@@ -71,5 +72,5 @@
 
   <AttemptsShowcase
     {attempts}
-    correctID={dailyStore.state.current[dateGameKey].answerID ?? -1} />
+    correctID={getDailyMonsterID(gameDate.toDate())} />
 </div>

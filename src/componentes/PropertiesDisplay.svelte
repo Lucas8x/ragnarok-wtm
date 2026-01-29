@@ -10,9 +10,15 @@
   <PropertyItem
     title="Level"
     text={comparasion.attemptData?.level}
-    greater={comparasion.greaterLevel} />
+    result={comparasion.level} />
+
   <PropertyItem
     title="HP"
     text={comparasion.attemptData?.hp}
-    greater={comparasion.greaterLevel} />
+    result={comparasion.hp} />
+
+  <PropertyItem
+    title="Size"
+    text={comparasion.attemptData?.size}
+    result={comparasion.size} />
 </div>

@@ -40,19 +40,11 @@ function daysSinceEpoch(date = new Date()) {
   return diff;
 }
 
-function getDailyWord(date = new Date()) {
+export function getDailyMonsterID(date = new Date()) {
   const d = daysSinceEpoch(date);
   const seed = cyrb53(String(d));
   const rnd = mulberry32(seed);
 
   const idx = Math.floor(rnd() * monsters.length);
-  return monsters[idx];
+  return monsters[idx].id;
 }
-
-[
-  new Date('2026-01-25'),
-  new Date('2026-01-26'),
-  new Date('2026-01-27'),
-].forEach((d) => {
-  console.log(getDailyWord(d));
-});

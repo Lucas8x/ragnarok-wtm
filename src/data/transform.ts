@@ -73,3 +73,4 @@ async function filterProps() {
 
 transformYmlToJson();
 transformToDict();
+filterProps();
