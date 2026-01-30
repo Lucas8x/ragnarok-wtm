@@ -1,30 +1,32 @@
-import type { ComparasionIndicator } from '$src/@types';
+import type { ComparasionIndicator, Monster } from '$src/@types';
 import monsters from '$src/data/monsters2.json';
 
 type ComparePropertiesResult = {
-  attemptData: (typeof monsters)[number];
+  attemptData?: Monster;
   level: ComparasionIndicator;
   hp: ComparasionIndicator;
-  race: boolean;
+  race: ComparasionIndicator;
   size: ComparasionIndicator;
-  element: boolean;
+  element: ComparasionIndicator;
 };
 
-function getIndicator(a: number, b: number): ComparasionIndicator {
+function getIndicator(a?: number, b?: number): ComparasionIndicator {
+  if (a === undefined || b === undefined) return '=';
+
   if (b > a) return '>';
   if (b < a) return '<';
   return '=';
 }
 
 // sizes
-const sizeOrder = ['Small', 'Medium', 'Large'] as const;
+const sizeOrder = ['Small', 'Medium', 'Large'] as Monster['size'][];
 
 export function compareProperties(
   attemptID: number | string,
   targetID: number | string,
 ): ComparePropertiesResult {
-  const attempt = monsters[attemptID as keyof typeof monsters];
-  const target = monsters[targetID as keyof typeof monsters];
+  const attempt = monsters[attemptID as keyof typeof monsters] as Monster;
+  const target = monsters[targetID as keyof typeof monsters] as Monster;
 
   console.log(attempt, target);
 

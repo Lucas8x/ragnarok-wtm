@@ -6,13 +6,17 @@
 
   let {
     title,
-    text,
+    text = '?',
+    icon,
     result,
   }: {
     title: string;
-    text: string;
+    text?: string | number;
+    icon: typeof ArrowDown;
     result?: ComparasionIndicator;
   } = $props();
+
+  const showIcon = $derived(typeof result !== 'boolean');
 </script>
 
 <div
@@ -20,14 +24,16 @@
     'bg-neo-red': result !== '=',
     'bg-neo-green': result === '=',
   })}>
-  {#if result !== '='}
-    {#if result === '>'}
-      <ArrowUp class="size-5" />
+  {#if showIcon}
+    {#if result !== '='}
+      {#if result === '>'}
+        <ArrowUp class="size-5" />
+      {:else}
+        <ArrowDown class="size-5" />
+      {/if}
     {:else}
-      <ArrowDown class="size-5" />
+      <Check class="size-5" />
     {/if}
-  {:else}
-    <Check class="size-5" />
   {/if}
 
   <div class="flex flex-col leading-5">
