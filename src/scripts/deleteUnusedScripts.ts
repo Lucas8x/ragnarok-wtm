@@ -1,6 +1,6 @@
 import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import Bun from 'bun';
-import { join } from 'path';
 import monsters from '../data/monsters.json';
 
 const assetsDir = join(import.meta.dir, '..', 'assets', 'sprites');

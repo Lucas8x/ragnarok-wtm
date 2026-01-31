@@ -24,7 +24,7 @@ async function transformYmlToJson() {
   );
 }
 
-async function transformToDict() {
+async function transformToObjct() {
   const data = {};
 
   const monsters = await Bun.file(
@@ -33,7 +33,7 @@ async function transformToDict() {
 
   monsters.forEach((monster) => {
     const { id, ...rest } = monster;
-    data[monster.id] = rest;
+    data[id] = rest;
   });
 
   await Bun.write(
@@ -72,7 +72,7 @@ async function filterProps() {
 }
 
 async function longestName() {
-  let names = [''];
+  let names: string[] = [];
 
   const monsters = await Bun.file(
     path.join(import.meta.dir, 'monsters.json'),
@@ -92,7 +92,6 @@ async function longestName() {
 }
 
 //longestName();
-
 //transformYmlToJson();
-//transformToDict();
+//transformToObjct();
 //filterProps();
