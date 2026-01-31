@@ -7,7 +7,7 @@
     $props();
 </script>
 
-<div class="flex gap-2">
+<div class="grid grid-cols-3 gap-2">
   <PropertyItem
     title="Level"
     icon={Zap}
@@ -31,4 +31,10 @@
     icon={Maximize2}
     text={comparasion.attemptData?.race}
     result={comparasion.race} />
+
+  <PropertyItem
+    title="Race"
+    icon={Maximize2}
+    text={comparasion.attemptData?.element}
+    result={comparasion.element} />
 </div>

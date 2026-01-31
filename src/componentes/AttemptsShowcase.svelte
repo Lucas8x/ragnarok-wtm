@@ -17,7 +17,7 @@
       <div class="flex flex-col gap-4">
         <h3 class="font-semibold">ATTEMPTS: {attempts.length}</h3>
 
-        <ul class="max-h-80 space-y-2 overflow-y-auto">
+        <ul class="max-h-96 space-y-2 overflow-y-auto">
           {#each attempts as monsterID, i (`${i}-${monsterID}`)}
             <RectangularMonsterShowcase {monsterID} {correctID} />
           {/each}

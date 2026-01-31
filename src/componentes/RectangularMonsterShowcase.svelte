@@ -16,33 +16,41 @@
   } = $props();
 
   let imgSrc: string | null = $state(null);
-  let isLoading: boolean = $state(true);
+  let isLoading = $state(true);
+  let error = $state(false);
 
   onMount(async () => {
     const key = `/src/assets/sprites/${monsterID}.png`;
-    isLoading = true;
     imgSrc = await spritesImages[key]();
-    isLoading = false;
   });
 
   const comparasion = $derived(compareProperties(monsterID, correctID));
 </script>
 
 <li
-  class={cn('neo-border flex items-center gap-2 p-2', {
+  class={cn('neo-border flex items-center gap-4 p-2', {
     'bg-pink-400': monsterID !== correctID,
     'bg-green-400': monsterID === correctID,
   })}>
-  <Card.Root class="p-2">
+  <Card.Root class="flex h-25 w-19 p-2">
     <Card.Content class="px-1 py-4">
-      {#if imgSrc && !isLoading}
+      {#if imgSrc && !error}
         <enhanced:img
-          class="size-12 object-contain"
+          class={cn('size-12 object-contain', { 'opacity-0': isLoading })}
           src={imgSrc}
-          alt={comparasion.attemptData.name} />
-      {:else if isLoading}
+          alt={comparasion.attemptData?.name ?? '?'}
+          onload={() => (isLoading = false)}
+          onerror={() => {
+            isLoading = false;
+            error = true;
+          }} />
+      {/if}
+
+      {#if isLoading}
         <LoaderCircle class="not-motion-reduce:animate-spin" />
-      {:else}
+      {/if}
+
+      {#if error}
         <div class=" flex size-20 h-full w-full items-center justify-center">
           <span>?</span>
         </div>
@@ -50,10 +58,9 @@
     </Card.Content>
   </Card.Root>
 
-  <div class="flex flex-col gap-2">
-    <div class="flex gap-2">
-      <p class="font-bold">{comparasion.attemptData.name}</p>
-    </div>
+  <div class="flex w-full flex-col gap-2">
+    <p class="text-center font-bold">Runaway Dandelion Member</p>
+
     <PropertiesDisplay {comparasion} />
   </div>
 </li>

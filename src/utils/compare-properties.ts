@@ -18,7 +18,6 @@ function getIndicator(a?: number, b?: number): ComparasionIndicator {
   return '=';
 }
 
-// sizes
 const sizeOrder = ['Small', 'Medium', 'Large'] as Monster['size'][];
 
 export function compareProperties(

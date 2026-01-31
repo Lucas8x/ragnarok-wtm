@@ -36,7 +36,7 @@
     {/if}
   {/if}
 
-  <div class="flex flex-col leading-5">
+  <div class="flex w-full flex-col text-center leading-5">
     <span>{title.toUpperCase()}</span>
     <span>{text}</span>
   </div>

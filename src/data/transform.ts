@@ -71,6 +71,28 @@ async function filterProps() {
   );
 }
 
-transformYmlToJson();
-transformToDict();
-filterProps();
+async function longestName() {
+  let names = [''];
+
+  const monsters = await Bun.file(
+    path.join(import.meta.dir, 'monsters.json'),
+  ).json();
+
+  monsters.forEach((monster) => {
+    names.push(monster.name);
+
+    names.sort((a, b) => b.length - a.length);
+
+    names = names.slice(0, 5);
+  });
+
+  names.forEach((name) => {
+    console.log(`${name.length}: ${name}`);
+  });
+}
+
+//longestName();
+
+//transformYmlToJson();
+//transformToDict();
+//filterProps();
