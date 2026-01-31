@@ -1,8 +1,5 @@
 <script lang="ts">
   import * as Card from '$lib/components/ui/card';
-  import { cn } from '$lib/utils';
-  import monsters from '$src/data/monsters2.json';
-  import { route } from '$src/stores/router';
   import RectangularMonsterShowcase from './RectangularMonsterShowcase.svelte';
 
   let { attempts, correctID }: { attempts: number[]; correctID: number } =

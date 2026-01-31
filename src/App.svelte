@@ -24,12 +24,12 @@
 
 <main
   class="bg- flex h-screen w-full flex-col bg-orange-100 font-sans antialiased">
-  <ModeWatcher />
+  <!-- <ModeWatcher /> -->
 
   <NavigationBar />
 
   <div class="flex h-full w-full justify-center">
-    <div class="w-full max-w-xl">
+    <div class="w-full max-w-xl px-2">
       {#if $route === '/'}
         <Home />
       {:else if $route === '/connoisseur'}
