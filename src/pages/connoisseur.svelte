@@ -1,10 +1,7 @@
-<script lang="ts">
-  import Alert from '@lucide/svelte/icons/triangle-alert';
+<script>
+  import UnderConstruction from '$src/componentes/UnderConstruction.svelte';
 </script>
 
-<main class="flex items-center justify-center h-screen">
-  <div class="flex flex-col text-center items-center">
-    <Alert class="size-28 opacity-50" />
-    <p>Under construction</p>
-  </div>
+<main class="flex h-full items-center justify-center">
+  <UnderConstruction />
 </main>
