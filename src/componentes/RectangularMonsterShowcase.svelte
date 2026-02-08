@@ -59,7 +59,7 @@
   </Card.Root>
 
   <div class="flex w-full flex-col gap-2">
-    <p class="text-center font-bold">Runaway Dandelion Member</p>
+    <p class="text-center font-bold">{comparasion.attemptData?.name}</p>
 
     <PropertiesDisplay {comparasion} />
   </div>
