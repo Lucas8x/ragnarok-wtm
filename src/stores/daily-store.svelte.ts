@@ -1,15 +1,10 @@
-import dayjs from 'dayjs';
 import { PersistedState } from 'runed';
+import type { DailyItemStorage } from '$src/@types';
+import { dayjs } from '$src/utils/dayjs';
 import { getDailyMonsterID } from '$src/utils/prng';
 
-type DailyItem = {
-  attempts: number[];
-  answerID?: number;
-  completed: boolean;
-};
-
 type DailyStore = {
-  [key: string]: DailyItem;
+  [key: string]: DailyItemStorage;
 };
 
 const state = new PersistedState<DailyStore>(
@@ -33,19 +28,19 @@ export const dailyStore = {
       };
     } */
 
-    if (state.current[gameDate]?.completed) {
+    if (state.current[gameDate]?.completedOn) {
       return;
     }
 
     state.current[gameDate] = {
       attempts: [monsterID, ...(state.current[gameDate]?.attempts || [])],
       answerID: undefined,
-      completed: false,
+      completedOn: undefined,
     };
 
-    if (monsterID === getDailyMonsterID(dayjs(gameDate).toDate())) {
-      state.current[gameDate].completed = true;
+    if (monsterID === getDailyMonsterID(dayjs.utc(gameDate))) {
       state.current[gameDate].answerID = monsterID;
+      state.current[gameDate].completedOn = dayjs.utc().toISOString();
       return true;
     }
   },

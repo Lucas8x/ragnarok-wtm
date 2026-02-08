@@ -11,6 +11,12 @@ export type Monster = {
 
 export type ComparasionIndicator = '=' | '>' | '<' | boolean;
 
+export type DailyItemStorage = {
+  attempts: number[];
+  answerID?: number;
+  completedOn?: string;
+};
+
 type Sizes = 'Small' | 'Medium' | 'Large';
 
 type Elements =
