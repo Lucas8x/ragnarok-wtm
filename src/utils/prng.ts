@@ -1,3 +1,4 @@
+import { dayjs } from '$src/utils/dayjs';
 import monsters from '../data/monsters.json';
 
 function cyrb53(str: string, seed = 0) {
@@ -30,17 +31,20 @@ function mulberry32(seed: number) {
   };
 }
 
-function daysSinceEpoch(date = new Date()) {
-  const epoch = new Date('2026-01-25');
-  const diff = Math.floor(
+function daysSinceEpoch(date = dayjs.utc()) {
+  const epoch = dayjs.utc('2026-01-25');
+
+  /* const diff = Math.floor(
     (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
       Date.UTC(epoch.getFullYear(), epoch.getMonth(), epoch.getDate())) /
       (24 * 60 * 60 * 1000),
   );
-  return diff;
+  return diff;*/
+
+  return date.startOf('day').diff(epoch.startOf('day'), 'day');
 }
 
-export function getDailyMonsterID(date = new Date()) {
+export function getDailyMonsterID(date = dayjs.utc()) {
   const d = daysSinceEpoch(date);
   const seed = cyrb53(String(d));
   const rnd = mulberry32(seed);
@@ -48,3 +52,7 @@ export function getDailyMonsterID(date = new Date()) {
   const idx = Math.floor(rnd() * monsters.length);
   return monsters[idx].id;
 }
+
+/* [...Array(20)].forEach((i, index) => {
+  console.log(getDailyMonsterID(dayjs.utc().subtract(index, 'day')));
+}); */
