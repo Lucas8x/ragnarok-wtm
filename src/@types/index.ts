@@ -17,6 +17,11 @@ export type DailyItemStorage = {
   completedOn?: string;
 };
 
+export type WordleItem = {
+  text: string;
+  submited: boolean;
+};
+
 type Sizes = 'Small' | 'Medium' | 'Large';
 
 type Elements =
