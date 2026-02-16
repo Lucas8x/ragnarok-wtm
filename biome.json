@@ -41,7 +41,7 @@
     }
   },
   "html": {
-    "experimentalFullSupportEnabled": false,
+    "experimentalFullSupportEnabled": true,
     "formatter": {
       "selfCloseVoidElements": "always",
       "indentScriptAndStyle": true
@@ -55,25 +55,5 @@
   "assist": {
     "enabled": true,
     "actions": { "source": { "organizeImports": "on" } }
-  },
-  "overrides": [
-    {
-      "includes": ["**/*.svelte"],
-      "formatter": {
-        "enabled": false
-      },
-      "linter": {
-        "rules": {
-          "style": {
-            "useConst": "off",
-            "useImportType": "off"
-          },
-          "correctness": {
-            "noUnusedVariables": "off",
-            "noUnusedImports": "off"
-          }
-        }
-      }
-    }
-  ]
+  }
 }
