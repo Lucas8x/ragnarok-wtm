@@ -1,7 +1,7 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
 export const route = writable(window.location.pathname);
 
-window.addEventListener("popstate", () => {
+window.addEventListener('popstate', () => {
   route.set(window.location.pathname);
 });

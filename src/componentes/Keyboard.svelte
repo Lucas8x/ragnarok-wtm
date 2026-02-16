@@ -24,6 +24,7 @@
     <div class="flex space-y-1 space-x-1">
       {#each row.split(' ') as key}
         <button
+          type="button"
           class={cn(
             'neo-border flex size-12 items-center justify-center font-bold uppercase hover:cursor-pointer hover:bg-orange-200 active:bg-orange-300',
             {
