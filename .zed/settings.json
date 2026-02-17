@@ -12,6 +12,13 @@
           "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
         }
       }
+    },
+    "CSS": {
+      "language_servers": [
+        "tailwindcss-intellisense-css",
+        "!vscode-css-language-server",
+        "..."
+      ]
     }
   }
 }
