@@ -62,13 +62,6 @@
       "includes": ["**/*.svelte"],
       "formatter": {
         "enabled": true
-      },
-      "linter": {
-        "rules": {
-          "correctness": {
-            "noUnusedVariables": "off"
-          }
-        }
       }
     }
   ]

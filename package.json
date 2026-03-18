@@ -11,7 +11,7 @@
     "format": "bunx @biomejs/biome format --write"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.7",
+    "@biomejs/biome": "2.4.8",
     "@internationalized/date": "^3.11.0",
     "@lucide/svelte": "^0.561.0",
     "@sveltejs/enhanced-img": "^0.9.3",
