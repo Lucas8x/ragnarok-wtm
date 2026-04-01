@@ -7,10 +7,7 @@
     "Svelte": {
       "format_on_save": "on",
       "formatter": {
-        "external": {
-          "command": "bunx",
-          "arguments": ["prettier", "--stdin-filepath", "{buffer_path}"]
-        }
+        "language_server": {"name": "biome"}
       }
     },
     "CSS": {
