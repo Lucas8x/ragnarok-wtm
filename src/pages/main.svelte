@@ -47,7 +47,8 @@
   {/if}
 
   <div
-    class="bg-neo-red neo-border shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2">
+    class="bg-neo-red neo-border shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2"
+  >
     <Flame className="w-5 h-5" fill={streak.onFire ? 'red' : 'transparent'} />
     <span class="font-bold">STREAK: {streak.streak}</span>
   </div>
@@ -55,7 +56,8 @@
   <Card.Root class="w-full">
     <Card.Content class="space-y-4 px-8 text-center">
       <div
-        class="bg-neo-yellow neo-border inline-flex items-center gap-2 px-4 py-2">
+        class="bg-neo-yellow neo-border inline-flex items-center gap-2 px-4 py-2"
+      >
         <Calendar className="w-5 h-5" />
         <span class="font-bold">Monster of the day</span>
       </div>
@@ -68,7 +70,8 @@
         onSelect={(id) => {
           handleGuess(dateGameKey, id);
           search = '';
-        }} />
+        }}
+      />
     </Card.Content>
   </Card.Root>
 
