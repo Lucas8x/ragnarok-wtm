@@ -20,17 +20,9 @@
 
     words[words.length - 1].submited = true;
 
-    if (words.every((i) => i.submited)) {
-      console.log('Over');
+    if (words.length === 6 && words.every((i) => i.submited)) {
+      alert('Over');
     }
-
-    // words = [
-    //   ...words.slice(0, -1),
-    //   {
-    //     ...lastItem,
-    //     submited: true,
-    //   },
-    // ];
   }
 
   function handleBackspace() {
@@ -75,35 +67,26 @@
       return;
     }
 
-    if (words.length === 6) {
+    if (words.length === 6 && lastWord.submited) {
       console.log('Limit reached.');
+      return;
+    }
+
+    if (words.length === 0 || lastWord.submited) {
+      words.push({
+        text: key,
+        submited: false,
+      });
       return;
     }
 
     words = [
       ...words.slice(0, -1),
       {
-        submited: false,
+        ...lastWord,
         text: (lastWord?.text || '').concat(key),
       },
     ];
-
-    /*if (words.length === 0) {
-      console.log('Adding new row.');
-      words.push({
-        text: key,
-        submited: false,
-      });
-    } else {
-      console.log('Updating current row.');
-      words = [
-        ...words.slice(0, -1),
-        {
-          ...lastWord,
-          text: lastWord.text.concat(key),
-        },
-      ];
-    }*/
   }
 
   $inspect(...words);
