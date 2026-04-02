@@ -2,10 +2,15 @@
   import type { WordleItem } from '$src/@types';
   import Keyboard from '$src/componentes/Keyboard.svelte';
   import WordleGrid from '$src/componentes/WordleGrid.svelte';
+  import { rankLetters } from '$src/utils/rankLetters';
+  import { wordCheck } from '$src/utils/wordCheck';
 
-  const word = 'criar';
+  const secret = 'criar';
 
   let words: Array<WordleItem> = $state([]);
+  let status: 'playing' | 'over' | 'scored' = $state('playing');
+
+  let ranks = $derived(rankLetters(words));
 
   function handleEnter() {
     if (words.length === 0) {
@@ -19,10 +24,16 @@
     }
 
     words[words.length - 1].submited = true;
+    words[words.length - 1].validation = wordCheck(
+      secret,
+      words[words.length - 1].text,
+    );
 
     if (words.length === 6 && words.every((i) => i.submited)) {
-      alert('Over');
+      status = 'over';
     }
+
+    console.log(...$state.snapshot(words));
   }
 
   function handleBackspace() {
@@ -76,6 +87,7 @@
       words.push({
         text: key,
         submited: false,
+        validation: [],
       });
       return;
     }
@@ -88,25 +100,19 @@
       },
     ];
   }
-
-  $inspect(...words);
 </script>
 
-<svelte:window on:keydown={(e) =>  handleKeyPress(e.key.toLocaleLowerCase())} />
+<svelte:window on:keydown={(e) => handleKeyPress(e.key.toLocaleLowerCase())} />
 
 <main class="flex h-full flex-col items-center gap-1 pt-4">
-  <WordleGrid {words} answer={word} />
+  <WordleGrid {words} />
+
   <Keyboard
-    highlight={[]}
-    exclude={[]}
+    highlight={ranks}
     onKeyPress={(key) => {
-      if (key === '{enter}') {
-        handleEnter();
-      } else if (key === '{bksp}') {
-        handleBackspace();
-      } else {
-        handleKeyPress(key.toLocaleLowerCase());
-      }
+      if (key === '{enter}') handleEnter();
+      else if (key === '{bksp}') handleBackspace();
+      else handleKeyPress(key.toLocaleLowerCase());
     }}
   />
 </main>

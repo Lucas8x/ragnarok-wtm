@@ -20,6 +20,7 @@ export type DailyItemStorage = {
 export type WordleItem = {
   text: string;
   submited: boolean;
+  validation: Array<number>;
 };
 
 type Sizes = 'Small' | 'Medium' | 'Large';
