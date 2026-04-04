@@ -3,52 +3,58 @@
   import Keyboard from '$src/componentes/Keyboard.svelte';
   import WordleGrid from '$src/componentes/WordleGrid.svelte';
   import { rankLetters } from '$src/utils/rankLetters';
-  import { wordCheck } from '$src/utils/wordCheck';
+  import { WorldeGame } from '$src/utils/wordleGame';
 
-  const secret = 'criar';
+  const game = new WorldeGame(5); // temporary
 
-  let words: Array<WordleItem> = $state([]);
+  let guesses: Array<WordleItem> = $state([]);
   let status: 'playing' | 'over' | 'scored' = $state('playing');
 
-  let ranks = $derived(rankLetters(words));
+  let ranks = $derived(rankLetters(guesses));
 
   function handleEnter() {
-    if (words.length === 0) {
+    if (guesses.length === 0) {
       return;
     }
 
-    const lastItem = words[words.length - 1];
+    const lastItem = guesses[guesses.length - 1];
 
     if (lastItem.text.length !== 5) {
       return;
     }
 
-    words[words.length - 1].submited = true;
-    words[words.length - 1].validation = wordCheck(
-      secret,
-      words[words.length - 1].text,
-    );
-
-    if (words.length === 6 && words.every((i) => i.submited)) {
-      status = 'over';
-    }
-
-    console.log(...$state.snapshot(words));
-  }
-
-  function handleBackspace() {
-    if (words.length === 0) {
+    if (!game.checkWordExists(lastItem.text)) {
+      alert('Word does not exist.');
       return;
     }
 
-    const lastWord = words[words.length - 1];
+    guesses[guesses.length - 1].submited = true;
+
+    guesses[guesses.length - 1].validation = game.weightWord(
+      game.secret.name,
+      guesses[guesses.length - 1].text,
+    );
+
+    if (guesses.length === 6 && guesses.every((i) => i.submited)) {
+      status = 'over';
+    }
+
+    console.log(...$state.snapshot(guesses));
+  }
+
+  function handleBackspace() {
+    if (guesses.length === 0) {
+      return;
+    }
+
+    const lastWord = guesses[guesses.length - 1];
 
     if (lastWord.submited || lastWord.text.length === 0) {
       return;
     }
 
-    words = [
-      ...words.slice(0, -1),
+    guesses = [
+      ...guesses.slice(0, -1),
       {
         ...lastWord,
         text: lastWord.text.slice(0, -1),
@@ -71,20 +77,20 @@
       return;
     }
 
-    const lastWord = words[words.length - 1];
+    const lastWord = guesses[guesses.length - 1];
 
     if (lastWord?.text.length === 5 && !lastWord.submited) {
       console.info('Cant write anymore.');
       return;
     }
 
-    if (words.length === 6 && lastWord.submited) {
+    if (guesses.length === 6 && lastWord.submited) {
       console.log('Limit reached.');
       return;
     }
 
-    if (words.length === 0 || lastWord.submited) {
-      words.push({
+    if (guesses.length === 0 || lastWord.submited) {
+      guesses.push({
         text: key,
         submited: false,
         validation: [],
@@ -92,8 +98,8 @@
       return;
     }
 
-    words = [
-      ...words.slice(0, -1),
+    guesses = [
+      ...guesses.slice(0, -1),
       {
         ...lastWord,
         text: (lastWord?.text || '').concat(key),
@@ -105,7 +111,7 @@
 <svelte:window on:keydown={(e) => handleKeyPress(e.key.toLocaleLowerCase())} />
 
 <main class="flex h-full flex-col items-center gap-1 pt-4">
-  <WordleGrid {words} />
+  <WordleGrid {guesses} />
 
   <Keyboard
     highlight={ranks}

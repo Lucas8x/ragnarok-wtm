@@ -2,7 +2,7 @@
   import { cn } from '$lib/utils';
   import type { WordleItem } from '$src/@types';
 
-  let { words }: { words: WordleItem[] } = $props();
+  let { guesses }: { guesses: WordleItem[] } = $props();
 
   const ROWS = 6;
   const COLUMNS = 5;
@@ -14,21 +14,21 @@
       {#each { length:COLUMNS } as _, j}
         <div
           class={cn('flex size-16 items-center justify-center ', {
-            'neo-border': !words[i]?.submited,
+            'neo-border': !guesses[i]?.submited,
             'bg-neo-green':
-              words[i]?.validation[j] === 2,
+              guesses[i]?.validation[j] === 2,
             'bg-neo-yellow':
-              words[i]?.validation[j] === 1,
+              guesses[i]?.validation[j] === 1,
             'bg-gray-400':
-              words[i]?.validation[j] === 0,
+              guesses[i]?.validation[j] === 0,
           })}
         >
           <span
             class={cn('text-2xl font-bold uppercase', {
-              'text-white': words[i]?.submited,
+              'text-white': guesses[i]?.submited,
             })}
           >
-            {words[i]?.text[j] ?? ''}
+            {guesses[i]?.text[j] ?? ''}
           </span>
         </div>
       {/each}
