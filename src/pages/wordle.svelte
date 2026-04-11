@@ -2,10 +2,8 @@
   import type { WordleItem } from '$src/@types';
   import Keyboard from '$src/componentes/Keyboard.svelte';
   import WordleGrid from '$src/componentes/WordleGrid.svelte';
+  import { wordleGame } from '$src/stores/wordle-store.svelte';
   import { rankLetters } from '$src/utils/rankLetters';
-  import { WorldeGame } from '$src/utils/wordleGame';
-
-  const game = new WorldeGame(5); // temporary
 
   let guesses: Array<WordleItem> = $state([]);
   let status: 'playing' | 'over' | 'scored' = $state('playing');
@@ -23,23 +21,29 @@
       return;
     }
 
-    if (!game.checkWordExists(lastItem.text)) {
+    if (!$wordleGame.checkWordExists(lastItem.text)) {
       alert('Word does not exist.');
       return;
     }
 
     guesses[guesses.length - 1].submited = true;
 
-    guesses[guesses.length - 1].validation = game.weightWord(
-      game.secret.name,
+    const validation = $wordleGame.weightWord(
+      $wordleGame.secret.name,
       guesses[guesses.length - 1].text,
     );
 
-    if (guesses.length === 6 && guesses.every((i) => i.submited)) {
-      status = 'over';
+    guesses[guesses.length - 1].validation = validation;
+
+    if (validation.every((i) => i === 2)) {
+      status = 'scored';
+      return;
     }
 
-    console.log(...$state.snapshot(guesses));
+    if (guesses.length === 6 && guesses.every((i) => i.submited)) {
+      status = 'over';
+      return;
+    }
   }
 
   function handleBackspace() {
@@ -63,16 +67,17 @@
   }
 
   function handleKeyPress(key: string) {
+    if (status !== 'playing') {
+      return;
+    }
     if (key === 'enter') {
       handleEnter();
       return;
     }
-
     if (key === 'backspace') {
       handleBackspace();
       return;
     }
-
     if (!/^[a-z]$/i.test(key)) {
       return;
     }
@@ -111,14 +116,26 @@
 <svelte:window on:keydown={(e) => handleKeyPress(e.key.toLocaleLowerCase())} />
 
 <main class="flex h-full flex-col items-center gap-1 pt-4">
+  <p class="pb-2">
+    {status === 'over'
+      ? 'This game is over'
+      : status === 'scored'
+        ? "You got it"
+        :'Guess the monster!'}
+  </p>
+
   <WordleGrid {guesses} />
 
   <Keyboard
     highlight={ranks}
     onKeyPress={(key) => {
-      if (key === '{enter}') handleEnter();
-      else if (key === '{bksp}') handleBackspace();
-      else handleKeyPress(key.toLocaleLowerCase());
+      if (key === '{enter}') {
+        handleEnter();
+      } else if (key === '{bksp}') {
+        handleBackspace();
+      } else {
+        handleKeyPress(key.toLocaleLowerCase());
+      }
     }}
   />
 </main>
