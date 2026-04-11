@@ -13,10 +13,16 @@ export class WorldeGame {
     this.filteredMonsters = filteredMonsters;
 
     const randomIndex = Math.floor(Math.random() * filteredMonsters.length);
+
     const { id, name } = filteredMonsters[randomIndex];
+
     this.secret = { id, name: name.toLowerCase() };
 
     console.log('[WORDLE] Secret monster:', this.secret.name);
+    console.log(
+      '[WORDLE]',
+      filteredMonsters.slice(0, 6).flatMap((m) => m.name),
+    );
   }
 
   checkWordExists(name: string) {
@@ -25,11 +31,10 @@ export class WorldeGame {
     if (this.filteredMonsters.some((m) => m.name.toLowerCase() === guessName)) {
       return true;
     }
-
     return false;
   }
 
-  weightWord(target: string, guess: string) {
+  weightWord(target: string, guess: string): number[] {
     const result = Array(guess.length).fill(null);
     const freq: Record<string, number> = {};
 
