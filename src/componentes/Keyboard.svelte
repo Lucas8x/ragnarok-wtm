@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Delete } from '@lucide/svelte/icons';
   import { cn } from '$lib/utils';
+  import { Button } from '$src/lib/components/ui/button';
   import type { rankLetters } from '$src/utils/rankLetters';
 
   const layout = [
@@ -22,20 +23,18 @@
   {#each layout as row}
     <div class="flex space-y-2 space-x-2">
       {#each row.split(' ') as key}
-        <button
+        <Button
           type="button"
           class={cn(
-            'neo-border shadow-shadow bg-slate-100 flex size-12 items-center justify-center font-bold uppercase hover:cursor-pointer  ',
+            'neo-border shadow-shadow bg-slate-200  flex size-12 items-center justify-center font-bold uppercase ',
             {
-              'hover:bg-orange-200 active:bg-orange-300':
-                highlight[key] === undefined,
               'flex-2': ['{enter}', '{bksp}'].includes(key),
-              'hover:bg-neo-red/60': key === '{bksp}',
+              'hover:bg-neo-red/50': key === '{bksp}',
               'active:bg-neo-red': key === '{bksp}',
-              'hover:bg-neo-green/60': key === '{enter}',
+              'hover:bg-neo-green/50': key === '{enter}',
               'active:bg-neo-green': key === '{enter}',
-              'bg-slate-400': highlight[key] === 0,
-              'bg-neo-yellow': highlight[key] === 1,
+              'bg-slate-500': highlight[key] === 0,
+              'bg-neo-yellow text-black': highlight[key] === 1,
               'bg-neo-green': highlight[key] === 2,
             },
           )}
@@ -46,7 +45,7 @@
           {#if key === '{bksp}'}
             <Delete size={24} />
           {/if}
-        </button>
+        </Button>
       {/each}
     </div>
   {/each}
