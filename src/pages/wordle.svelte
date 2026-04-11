@@ -115,8 +115,10 @@
 
 <svelte:window on:keydown={(e) => handleKeyPress(e.key.toLocaleLowerCase())} />
 
-<main class="flex h-full flex-col items-center gap-1 pt-4">
-  <p class="pb-2">
+<main class="flex h-full flex-col items-center gap-1 pt-2">
+  <p
+    class="neo-border bg-neo-yellow shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2 mb-2"
+  >
     {status === 'over'
       ? 'This game is over'
       : status === 'scored'
