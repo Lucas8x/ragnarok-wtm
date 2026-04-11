@@ -7,7 +7,7 @@ import { getDailyMonsterID } from '$src/utils/prng';
 const dateFormat = 'DDMMYYYY';
 
 type DailyStore = {
-  [key: string]: DailyItemStorage;
+  [dateKey: string]: DailyItemStorage;
 };
 
 const state = new PersistedState<DailyStore>(
