@@ -31,7 +31,9 @@
   class={cn('neo-border flex items-center gap-4 p-2', {
     'bg-pink-400': monsterID !== correctID,
     'bg-green-400': monsterID === correctID,
-  })}>
+  })}
+  data-monster-id={monsterID}
+>
   <Card.Root class="flex h-25 w-19 p-2">
     <Card.Content class="px-1 py-4">
       {#if imgSrc && !error}
@@ -43,7 +45,8 @@
           onerror={() => {
             isLoading = false;
             error = true;
-          }} />
+          }}
+        />
       {/if}
 
       {#if isLoading}
@@ -60,7 +63,6 @@
 
   <div class="flex w-full flex-col gap-2">
     <p class="text-center font-bold">{comparasion.attemptData?.name}</p>
-
     <PropertiesDisplay {comparasion} />
   </div>
 </li>
