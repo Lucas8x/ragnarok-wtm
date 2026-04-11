@@ -13,7 +13,7 @@
     <div class="flex space-x-2">
       {#each { length: COLUMNS } as _, j}
         <div
-          class={cn('flex size-16 items-center justify-center neo-border', {
+          class={cn('flex size-16  items-center justify-center neo-border bg-orange-50', {
             'shadow-shadow': guesses[i]?.submited,
             'bg-neo-green':
               guesses[i]?.validation[j] === 2,
@@ -26,6 +26,7 @@
           <span
             class={cn('text-2xl font-bold uppercase', {
               'text-white': guesses[i]?.submited,
+              'text-black':guesses[i]?.validation[j] === 1
             })}
           >
             {guesses[i]?.text[j] ?? ''}
