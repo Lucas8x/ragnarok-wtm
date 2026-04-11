@@ -1,3 +1,25 @@
+export type ComparasionIndicator = '=' | '>' | '<' | boolean;
+
+//Daily Game
+
+export type DailyItemStorage = {
+  attempts: number[];
+  answerID?: number;
+  completedOn?: string;
+};
+
+// Worlde Game
+
+export type WordleItem = {
+  text: string;
+  submited: boolean;
+  validation: Array<number>;
+};
+
+export type WordleItemStorage = {};
+
+// Others
+
 export type Monster = {
   id: number;
   aegisName: string;
@@ -7,20 +29,6 @@ export type Monster = {
   size?: Sizes;
   race?: Races;
   element?: Elements;
-};
-
-export type ComparasionIndicator = '=' | '>' | '<' | boolean;
-
-export type DailyItemStorage = {
-  attempts: number[];
-  answerID?: number;
-  completedOn?: string;
-};
-
-export type WordleItem = {
-  text: string;
-  submited: boolean;
-  validation: Array<number>;
 };
 
 type Sizes = 'Small' | 'Medium' | 'Large';
