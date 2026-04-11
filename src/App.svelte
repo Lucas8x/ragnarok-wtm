@@ -18,12 +18,9 @@
   };
 </script>
 
-<svelte:head>
-  <title>{$_(titles[$route])} - Ragnarok</title>
-</svelte:head>
+<svelte:head> <title>{$_(titles[$route])} - Ragnarok</title> </svelte:head>
 
-<main
-  class="bg- flex h-screen w-full flex-col bg-orange-100 font-sans antialiased">
+<main class="flex h-screen w-full flex-col bg-orange-100 font-sans antialiased">
   <!-- <ModeWatcher /> -->
 
   <NavigationBar />
