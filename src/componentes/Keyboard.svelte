@@ -18,14 +18,14 @@
   } = $props();
 </script>
 
-<div>
+<div class=" mt-4">
   {#each layout as row}
-    <div class="flex space-y-1 space-x-1">
+    <div class="flex space-y-2 space-x-2">
       {#each row.split(' ') as key}
         <button
           type="button"
           class={cn(
-            'neo-border flex size-12 items-center justify-center font-bold uppercase hover:cursor-pointer  ',
+            'neo-border shadow-shadow bg-slate-100 flex size-12 items-center justify-center font-bold uppercase hover:cursor-pointer  ',
             {
               'hover:bg-orange-200 active:bg-orange-300':
                 highlight[key] === undefined,
