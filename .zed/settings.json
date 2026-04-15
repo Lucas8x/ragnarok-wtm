@@ -1,13 +1,11 @@
-// Folder-specific settings
-//
-// For a full list of overridable settings, and general information on folder-specific settings,
-// see the documentation: https://zed.dev/docs/configuring-zed#settings-files
 {
   "languages": {
     "Svelte": {
       "format_on_save": "on",
       "formatter": {
-        "language_server": {"name": "biome"}
+        "language_server": {
+          "name": "biome"
+        }
       }
     },
     "CSS": {
@@ -16,6 +14,52 @@
         "!vscode-css-language-server",
         "..."
       ]
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true
+      },
+      "formatter": {
+        "language_server": {
+          "name": "biome"
+        }
+      }
+    }
+  },
+  "format_on_save": "on",
+  "formatter": "language_server",
+  "lsp": {
+    "typescript-language-server": {
+      "settings": {
+        "typescript": {
+          "preferences": {
+            "includePackageJsonAutoImports": "on"
+          }
+        }
+      }
     }
   }
 }
