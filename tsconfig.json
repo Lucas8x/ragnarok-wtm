@@ -11,7 +11,8 @@
       "$lib/*": ["./src/lib/*"],
       "$src": ["./src"],
       "$src/*": ["./src/*"]
-    }
+    },
+    "strictNullChecks": true
   },
   "exclude": ["node_modules", "dist", "build"]
 }

@@ -22,7 +22,8 @@
       "$lib/*": ["./src/lib/*"],
       "$src": ["./src"],
       "$src/*": ["./src/*"]
-    }
+    },
+    "strictNullChecks": true
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
 }
