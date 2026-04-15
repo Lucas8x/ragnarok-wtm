@@ -11,42 +11,33 @@
     "includes": ["src/**"]
   },
   "formatter": {
-    "enabled": true,
-    "formatWithErrors": false,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 80,
-    "attributePosition": "auto",
     "bracketSameLine": false,
-    "bracketSpacing": true,
-    "expand": "auto",
-    "useEditorconfig": true
+    "expand": "auto"
   },
   "linter": {
-    "enabled": true,
     "rules": {
-      "recommended": true
+      "correctness": {
+        "noUnusedVariables": "warn"
+      },
+      "style": {
+        "useConsistentTypeDefinitions": {
+          "level": "warn",
+          "options": {
+            "style": "type"
+          }
+        }
+      }
     }
   },
   "javascript": {
     "formatter": {
-      "jsxQuoteStyle": "single",
-      "quoteProperties": "asNeeded",
-      "trailingCommas": "all",
-      "semicolons": "always",
-      "arrowParentheses": "always",
-      "bracketSameLine": false,
       "quoteStyle": "single",
-      "attributePosition": "auto",
-      "bracketSpacing": true
+      "jsxQuoteStyle": "single"
     }
   },
   "html": {
-    "experimentalFullSupportEnabled": true,
     "formatter": {
-      "selfCloseVoidElements": "always",
-      "indentScriptAndStyle": true
+      "selfCloseVoidElements": "always"
     }
   },
   "css": {
@@ -61,13 +52,5 @@
         "organizeImports": "on"
       }
     }
-  },
-  "overrides": [
-    {
-      "includes": ["**/*.svelte"],
-      "formatter": {
-        "enabled": true
-      }
-    }
-  ]
+  }
 }
