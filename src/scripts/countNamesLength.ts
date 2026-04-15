@@ -4,7 +4,7 @@ const names = monsters.map((monster) => monster.name);
 
 const lengthsCount: Record<number | string, number> = {};
 
-names.forEach((name) => {
+for (const name of names) {
   const length = name.length;
 
   if (lengthsCount[length]) {
@@ -20,11 +20,11 @@ names.forEach((name) => {
       lengthsCount.doubleHyphens = (lengthsCount.doubleHyphens || 0) + 1;
     }
   }
-});
+}
 
 console.table(
   Object.entries(lengthsCount).map(([length, count]) => ({
-    length: length,
+    length,
     count,
-  })),
+  }))
 );
