@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Calendar, Flame, Hash, Send, Star } from '@lucide/svelte/icons';
-  import * as Card from '$lib/components/ui/card';
+  import { Card, CardContent } from '$lib/components/ui/card';
   import PredictInput from '$src/componentes/PredictInput.svelte';
   import { dailyStore, getGameData } from '$src/stores/daily-store.svelte';
   import { useSearchParams } from '$src/utils/useSearchParams.svelte';
@@ -19,14 +19,14 @@
 
 <div class="flex flex-col items-center justify-center gap-6 pt-4">
   {#if gameData.isPastDate}
-    <Card.Root>
-      <Card.Content class="px-8 text-center">
+    <Card>
+      <CardContent class="px-8 text-center">
         <span>
           You playing the game of the day
           <b>{gameData.gameDate.format('DD/MM/YYYY')}</b>
         </span>
-      </Card.Content>
-    </Card.Root>
+      </CardContent>
+    </Card>
   {/if}
 
   <div
@@ -39,8 +39,8 @@
     <span class="font-bold">STREAK: {gameData.streak.streak}</span>
   </div>
 
-  <Card.Root class="w-full">
-    <Card.Content class="space-y-4 px-8 text-center">
+  <Card class="w-full">
+    <CardContent class="space-y-4 px-8 text-center">
       <div
         class="bg-neo-yellow neo-border inline-flex items-center gap-2 px-4 py-2"
       >
@@ -58,8 +58,8 @@
           search = '';
         }}
       />
-    </Card.Content>
-  </Card.Root>
+    </CardContent>
+  </Card>
 
   <AttemptsShowcase
     attempts={gameData.attempts}

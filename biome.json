@@ -21,6 +21,8 @@
       },
       "style": {
         "noNestedTernary": "off",
+        "noParameterProperties": "off",
+        "useConsistentMemberAccessibility": "off",
         "useConsistentTypeDefinitions": {
           "level": "warn",
           "options": {

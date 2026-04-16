@@ -8,7 +8,7 @@ export class WorldeGame {
     this.nameLength = nameLength;
 
     const filteredMonsters = monsters.filter(
-      (m) => m.name.length === nameLength,
+      (m) => m.name.length === nameLength
     );
     this.filteredMonsters = filteredMonsters;
 
@@ -21,7 +21,7 @@ export class WorldeGame {
     console.log('[WORDLE] Secret monster:', this.secret.name);
     console.log(
       '[WORDLE]',
-      filteredMonsters.slice(0, 6).flatMap((m) => m.name),
+      filteredMonsters.slice(0, 6).flatMap((m) => m.name)
     );
   }
 
@@ -35,7 +35,7 @@ export class WorldeGame {
   }
 
   weightWord(target: string, guess: string): number[] {
-    const result = Array(guess.length).fill(null);
+    const result = new Array(guess.length).fill(null);
     const freq: Record<string, number> = {};
 
     for (const char of target) {
@@ -52,7 +52,9 @@ export class WorldeGame {
     }
 
     for (let i = 0; i < guess.length; i++) {
-      if (result[i]) continue;
+      if (result[i]) {
+        continue;
+      }
 
       const char = guess[i];
 

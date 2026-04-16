@@ -5,7 +5,9 @@
   import { wordleGame } from '$src/stores/wordle-store.svelte';
   import { rankLetters } from '$src/utils/rankLetters';
 
-  let guesses: Array<WordleItem> = $state([]);
+  const ALPHABET_REGEX = /^[a-z]$/i;
+
+  let guesses: WordleItem[] = $state([]);
   let status: 'playing' | 'over' | 'scored' = $state('playing');
 
   let ranks = $derived(rankLetters(guesses));
@@ -15,25 +17,24 @@
       return;
     }
 
-    const lastItem = guesses[guesses.length - 1];
-
-    if (lastItem.text.length !== 5) {
+    const lastItem = guesses.at(-1);
+    if (!lastItem || lastItem.text.length !== 5) {
       return;
     }
 
     if (!$wordleGame.checkWordExists(lastItem.text)) {
-      alert('Word does not exist.');
+      alert('Word does not exist.'); // toast
       return;
     }
 
-    guesses[guesses.length - 1].submited = true;
+    lastItem.submited = true;
 
     const validation = $wordleGame.weightWord(
       $wordleGame.secret.name,
-      guesses[guesses.length - 1].text,
+      lastItem.text
     );
 
-    guesses[guesses.length - 1].validation = validation;
+    lastItem.validation = validation;
 
     if (validation.every((i) => i === 2)) {
       status = 'scored';
@@ -51,9 +52,9 @@
       return;
     }
 
-    const lastWord = guesses[guesses.length - 1];
+    const lastWord = guesses.at(-1);
 
-    if (lastWord.submited || lastWord.text.length === 0) {
+    if (!lastWord || lastWord.submited || lastWord.text.length === 0) {
       return;
     }
 
@@ -78,11 +79,14 @@
       handleBackspace();
       return;
     }
-    if (!/^[a-z]$/i.test(key)) {
+    if (!ALPHABET_REGEX.test(key)) {
       return;
     }
 
-    const lastWord = guesses[guesses.length - 1];
+    const lastWord = guesses.at(-1);
+    if (!lastWord) {
+      return;
+    }
 
     if (lastWord?.text.length === 5 && !lastWord.submited) {
       console.info('Cant write anymore.');

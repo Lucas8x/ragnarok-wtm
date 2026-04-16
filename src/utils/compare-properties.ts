@@ -11,10 +11,15 @@ type ComparePropertiesResult = {
 };
 
 function getIndicator(a?: number, b?: number): ComparasionIndicator {
-  if (a === undefined || b === undefined) return '=';
-
-  if (b > a) return '>';
-  if (b < a) return '<';
+  if (a === undefined || b === undefined) {
+    return '=';
+  }
+  if (b > a) {
+    return '>';
+  }
+  if (b < a) {
+    return '<';
+  }
   return '=';
 }
 
@@ -22,7 +27,7 @@ const sizeOrder = ['Small', 'Medium', 'Large'] as Monster['size'][];
 
 export function compareProperties(
   attemptID: number | string,
-  targetID: number | string,
+  targetID: number | string
 ): ComparePropertiesResult {
   const attempt = monsters[attemptID as keyof typeof monsters] as Monster;
   const target = monsters[targetID as keyof typeof monsters] as Monster;
@@ -37,7 +42,7 @@ export function compareProperties(
     element: attempt?.element === target?.element,
     size: getIndicator(
       sizeOrder.indexOf(attempt?.size),
-      sizeOrder.indexOf(target?.size),
+      sizeOrder.indexOf(target?.size)
     ),
   };
 }
