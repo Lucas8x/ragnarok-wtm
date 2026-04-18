@@ -27,7 +27,7 @@
       return;
     }
 
-    lastItem.submited = true;
+    lastItem.submitted = true;
 
     const validation = $wordleGame.weightWord(
       $wordleGame.secret.name,
@@ -41,7 +41,7 @@
       return;
     }
 
-    if (guesses.length === 6 && guesses.every((i) => i.submited)) {
+    if (guesses.length === 6 && guesses.every((i) => i.submitted)) {
       status = 'over';
       return;
     }
@@ -54,7 +54,7 @@
 
     const lastWord = guesses.at(-1);
 
-    if (!lastWord || lastWord.submited || lastWord.text.length === 0) {
+    if (!lastWord || lastWord.submitted || lastWord.text.length === 0) {
       return;
     }
 
@@ -84,24 +84,21 @@
     }
 
     const lastWord = guesses.at(-1);
-    if (!lastWord) {
-      return;
-    }
 
-    if (lastWord?.text.length === 5 && !lastWord.submited) {
+    if (lastWord?.text.length === 5 && !lastWord.submitted) {
       console.info('Cant write anymore.');
       return;
     }
 
-    if (guesses.length === 6 && lastWord.submited) {
+    if (guesses.length === 6 && lastWord?.submitted) {
       console.log('Limit reached.');
       return;
     }
 
-    if (guesses.length === 0 || lastWord.submited) {
+    if (guesses.length === 0 || lastWord?.submitted) {
       guesses.push({
         text: key,
-        submited: false,
+        submitted: false,
         validation: [],
       });
       return;
