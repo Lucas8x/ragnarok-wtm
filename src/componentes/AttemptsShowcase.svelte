@@ -1,13 +1,13 @@
 <script lang="ts">
-  import * as Card from '$lib/components/ui/card';
+  import { Card, CardContent } from '$lib/components/ui/card';
   import RectangularMonsterShowcase from './RectangularMonsterShowcase.svelte';
 
   let { attempts, correctID }: { attempts: number[]; correctID: number } =
     $props();
 </script>
 
-<Card.Root class="w-full">
-  <Card.Content class="px-4">
+<Card class="w-full">
+  <CardContent class="px-4">
     {#if attempts.length === 0}
       <div class="text-center">Your attempts you be show here.</div>
     {:else}
@@ -21,5 +21,5 @@
         </ul>
       </div>
     {/if}
-  </Card.Content>
-</Card.Root>
+  </CardContent>
+</Card>

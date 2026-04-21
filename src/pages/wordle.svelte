@@ -58,13 +58,13 @@
       return;
     }
 
-    guesses = [
-      ...guesses.slice(0, -1),
-      {
-        ...lastWord,
-        text: lastWord.text.slice(0, -1),
-      },
-    ];
+    const updatedWord: WordleItem = {
+      text: lastWord.text.slice(0, -1),
+      submitted: lastWord.submitted,
+      validation: lastWord.validation,
+    };
+
+    guesses = [...guesses.slice(0, -1), updatedWord];
   }
 
   function handleKeyPress(key: string) {
@@ -104,13 +104,17 @@
       return;
     }
 
-    guesses = [
-      ...guesses.slice(0, -1),
-      {
-        ...lastWord,
-        text: (lastWord?.text || '').concat(key),
-      },
-    ];
+    if (!lastWord) {
+      return;
+    }
+
+    const updatedWord: WordleItem = {
+      text: lastWord.text.concat(key),
+      submitted: lastWord.submitted,
+      validation: lastWord.validation,
+    };
+
+    guesses = [...guesses.slice(0, -1), updatedWord];
   }
 </script>
 

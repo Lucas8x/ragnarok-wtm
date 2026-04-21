@@ -1,63 +1,59 @@
 import path from 'node:path';
+import { file, write, YAML } from 'bun';
+import type { Monster } from '$src/@types';
+
+const monsters = (await file(
+  path.join(import.meta.dir, 'monsters.json')
+).json()) as Monster[];
 
 async function transformYmlToJson() {
-  const yml = Bun.YAML.parse(
-    await Bun.file(path.join(import.meta.dir, 'mob_db.yml')).text(),
+  const yml = YAML.parse(
+    await file(path.join(import.meta.dir, 'mob_db.yml')).text()
   );
 
-  const data = yml.Body.map(
-    ({ Id, AegisName, Name, Level, Hp, Size, Element, Race }) => ({
-      id: Id,
-      aegisName: AegisName,
-      name: Name,
-      level: Level,
-      hp: Hp,
-      size: Size,
-      race: Race,
-      element: Element,
-    }),
-  );
+  const data = yml.Body.map((i) => ({
+    id: i.Id,
+    aegisName: i.AegisName,
+    name: i.Name,
+    level: i.Level,
+    hp: i.Hp,
+    size: i.Size,
+    race: i.Race,
+    element: i.Element,
+  }));
 
-  await Bun.write(
+  await write(
     path.join(import.meta.dir, 'monsters.json'),
-    JSON.stringify(data, null, 0),
+    JSON.stringify(data, null, 0)
   );
 }
 
-async function transformToObjct() {
+async function transformToObject() {
   const data = {};
 
-  const monsters = await Bun.file(
-    path.join(import.meta.dir, 'monsters.json'),
-  ).json();
-
-  monsters.forEach((monster) => {
+  for (const monster of monsters as Monster[]) {
     const { id, ...rest } = monster;
     data[id] = rest;
-  });
+  }
 
-  await Bun.write(
+  await write(
     path.join(import.meta.dir, 'monsters2.json'),
-    JSON.stringify(data, null),
+    JSON.stringify(data, null)
   );
 }
 
 async function filterProps() {
-  const races = new Set<string>();
-  const elements = new Set<string>();
-  const sizes = new Set<string>();
+  const races = new Set<string | undefined>();
+  const elements = new Set<string | undefined>();
+  const sizes = new Set<string | undefined>();
 
-  const monsters = await Bun.file(
-    path.join(import.meta.dir, 'monsters.json'),
-  ).json();
-
-  monsters.forEach((monster) => {
+  for (const monster of monsters) {
     races.add(monster.race);
     elements.add(monster.element);
     sizes.add(monster.size);
-  });
+  }
 
-  await Bun.write(
+  await write(
     path.join(import.meta.dir, './props.json'),
     JSON.stringify(
       {
@@ -66,32 +62,25 @@ async function filterProps() {
         sizes: [...sizes],
       },
       null,
-      2,
-    ),
+      2
+    )
   );
 }
 
-async function longestName() {
-  let names: string[] = [];
+function longestName() {
+  const names = monsters
+    .map((monster) => monster.name)
+    .sort((a, b) => b.length - a.length);
 
-  const monsters = await Bun.file(
-    path.join(import.meta.dir, 'monsters.json'),
-  ).json();
-
-  monsters.forEach((monster) => {
-    names.push(monster.name);
-
-    names.sort((a, b) => b.length - a.length);
-
-    names = names.slice(0, 5);
-  });
-
-  names.forEach((name) => {
+  for (const name of names.slice(0, 6)) {
     console.log(`${name.length}: ${name}`);
-  });
+  }
 }
 
-//longestName();
 //transformYmlToJson();
-//transformToObjct();
+
+longestName();
+
+//transformToObject();
+
 //filterProps();

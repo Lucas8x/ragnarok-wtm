@@ -1,7 +1,14 @@
 <script lang="ts">
   import { Send } from '@lucide/svelte/icons';
   import { Button } from '$lib/components/ui/button';
-  import * as Command from '$lib/components/ui/command';
+  import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+  } from '$lib/components/ui/command';
   import monsters from '../data/monsters.json';
 
   let {
@@ -17,33 +24,34 @@
   let filtered = $derived(
     monsters
       .filter((item) =>
-        item.name.toLowerCase().startsWith(search.toLowerCase()),
+        item.name.toLowerCase().startsWith(search.toLowerCase())
       )
-      .slice(0, 6),
+      .slice(0, 6)
   );
 </script>
 
 <div class="flex gap-2">
-  <Command.Root class="bg-white ">
-    <Command.Input
+  <Command class="bg-white ">
+    <CommandInput
       bind:value={search}
       placeholder={scored ? 'You got it!' : 'Guess a monster...'}
-      disabled={scored} />
+      disabled={scored}
+    />
 
-    <Command.List>
+    <CommandList>
       {#if search.trim().length > 0 && filtered.length > 0}
-        <Command.Group>
+        <CommandGroup>
           {#each filtered as monster}
-            <Command.Item onSelect={() => onSelect(monster.id)}>
+            <CommandItem onSelect={() => onSelect(monster.id)}>
               <span>{monster.name}</span>
-            </Command.Item>
+            </CommandItem>
           {/each}
-        </Command.Group>
+        </CommandGroup>
       {:else if search.trim().length > 0 && filtered.length === 0}
-        <Command.Empty>No results found.</Command.Empty>
+        <CommandEmpty>No results found.</CommandEmpty>
       {/if}
-    </Command.List>
-  </Command.Root>
+    </CommandList>
+  </Command>
 
   <!-- <button
     type="submit"
