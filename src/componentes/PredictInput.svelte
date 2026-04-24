@@ -31,7 +31,7 @@
 </script>
 
 <div class="flex gap-2">
-  <Command class="bg-white ">
+  <Command class="bg-white " shouldFilter={false}>
     <CommandInput
       bind:value={search}
       placeholder={scored ? 'You got it!' : 'Guess a monster...'}
