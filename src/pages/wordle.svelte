@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { WordleItem } from '$src/@types';
   import Keyboard from '$src/componentes/Keyboard.svelte';
+  import TimedToast from '$src/componentes/TimedToast.svelte';
   import WordleGrid from '$src/componentes/WordleGrid.svelte';
   import { wordleGame } from '$src/stores/wordle-store.svelte';
   import { rankLetters } from '$src/utils/rankLetters';
@@ -9,6 +10,7 @@
 
   let guesses: WordleItem[] = $state([]);
   let status: 'playing' | 'over' | 'scored' = $state('playing');
+  let unknownWordAlertVisible = $state(false);
 
   let ranks = $derived(rankLetters(guesses));
 
@@ -23,7 +25,7 @@
     }
 
     if (!$wordleGame.checkWordExists(lastItem.text)) {
-      alert('Word does not exist.'); // toast
+      unknownWordAlertVisible = true;
       return;
     }
 
@@ -132,6 +134,14 @@
   </p>
 
   <WordleGrid {guesses} />
+
+  {#if unknownWordAlertVisible}
+    <TimedToast
+      onClose={() => {
+        unknownWordAlertVisible = false;
+      }}
+    />
+  {/if}
 
   <Keyboard
     highlight={ranks}
