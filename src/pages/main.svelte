@@ -2,15 +2,13 @@
   import { Calendar, Flame, Hash, Send, Star } from '@lucide/svelte/icons';
   import { Card, CardContent } from '$lib/components/ui/card';
   import PredictInput from '$src/componentes/PredictInput.svelte';
-  import { dailyStore, getGameData } from '$src/stores/daily-store.svelte';
+  import { getGameData, handleGuess } from '$src/stores/daily-store.svelte';
   import { useSearchParams } from '$src/utils/useSearchParams.svelte';
   import AttemptsShowcase from '../componentes/AttemptsShowcase.svelte';
   import { dayjs } from '../utils/dayjs';
 
   const dateFormat = 'DDMMYYYY';
   const urlDate = useSearchParams('date', dayjs.utc().format(dateFormat));
-
-  const { handleGuess } = dailyStore;
 
   const gameData = $derived(getGameData($urlDate));
 
