@@ -20,7 +20,7 @@
     }
 
     const lastItem = guesses.at(-1);
-    if (!lastItem || lastItem.text.length !== 5) {
+    if (lastItem?.text.length !== 5) {
       return;
     }
 
@@ -124,7 +124,7 @@
 
 <main class="flex h-full flex-col items-center gap-1 pt-2">
   <p
-    class="neo-border bg-neo-yellow shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2 mb-2"
+    class="neo-border font-extrabold bg-yellow-400 shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2 mb-2"
   >
     {status === 'over'
       ? 'This game is over'

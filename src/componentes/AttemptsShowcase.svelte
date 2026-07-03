@@ -16,7 +16,7 @@
 
         <ul class="max-h-96 space-y-2 overflow-y-auto">
           {#each attempts as monsterID, i (`${i}-${monsterID}`)}
-            <RectangularMonsterShowcase {monsterID} {correctID} />
+            <RectangularMonsterShowcase {correctID} {monsterID} />
           {/each}
         </ul>
       </div>

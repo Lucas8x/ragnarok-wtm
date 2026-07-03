@@ -12,7 +12,7 @@
   import monsters from '../data/monsters.json';
 
   let {
-    scored,
+    scored = false,
     search = $bindable(''),
     onSelect,
   }: {

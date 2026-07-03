@@ -3,8 +3,9 @@ import monsters from '../data/monsters.json';
 export class WorldeGame {
   secret: { id: number; name: string };
   filteredMonsters: typeof monsters = [];
+  nameLength: number;
 
-  constructor(public nameLength = 5) {
+  constructor(nameLength = 5) {
     this.nameLength = nameLength;
 
     const filteredMonsters = monsters.filter(

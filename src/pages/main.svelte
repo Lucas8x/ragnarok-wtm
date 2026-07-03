@@ -49,12 +49,12 @@
       <h2 class="text-lg font-bold">Can you guess the monster of the day?</h2>
 
       <PredictInput
-        bind:search
-        scored={gameData.scored}
         onSelect={(id) => {
           handleGuess(gameData.dateGameKey, id);
           search = '';
         }}
+        scored={gameData.scored}
+        bind:search
       />
     </CardContent>
   </Card>

@@ -35,17 +35,17 @@
   data-monster-id={monsterID}
 >
   <Card class="flex h-25 w-19 p-2">
-    <CardContent class="px-1 py-4">
+    <CardContent class="px-1 py-4" data-spriteId={monsterID}>
       {#if imgSrc && !imgError}
         <enhanced:img
-          class={cn('size-12 object-contain', { 'opacity-0': isLoading })}
-          src={imgSrc}
           alt={comparasion.attemptData?.name ?? '?'}
-          onload={() => (isLoading = false)}
+          class={cn('size-12 object-contain', { 'opacity-0': isLoading })}
           onerror={() => {
             isLoading = false;
             imgError = true;
           }}
+          onload={() => (isLoading = false)}
+          src={imgSrc}
         />
       {/if}
 

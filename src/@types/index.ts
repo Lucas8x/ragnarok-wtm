@@ -13,7 +13,7 @@ export type DailyItemStorage = {
 export type WordleItem = {
   text: string;
   submitted: boolean;
-  validation: Array<number>;
+  validation: number[];
 };
 
 export type WordleItemStorage = {};

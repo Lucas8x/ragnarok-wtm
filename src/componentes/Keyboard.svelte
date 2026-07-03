@@ -19,13 +19,13 @@
   } = $props();
 </script>
 
-<div class=" mt-4">
+<div class="mt-4">
   {#each layout as row}
     <div class="flex space-y-2 space-x-2">
       {#each row.split(' ') as key}
         <Button
           class={cn(
-            'neo-border shadow-shadow bg-slate-200  flex size-12 items-center justify-center font-bold uppercase ',
+            'shadow-shadow neo-border flex size-12 items-center justify-center bg-orange-100 font-bold uppercase',
             {
               'flex-2': ['{enter}', '{bksp}'].includes(key),
               'hover:bg-neo-red/50': key === '{bksp}',
@@ -39,7 +39,7 @@
           )}
           onclick={() => onKeyPress(key)}
         >
-          {key === '{enter}' ? 'Enter' : key !== '{bksp}' ? key : ''}
+          {key === '{enter}' ? 'Enter' : key === '{bksp}' ? '' : key}
 
           {#if key === '{bksp}'}
             <Delete size={24} />
