@@ -10,10 +10,6 @@
     "ignoreUnknown": true,
     "includes": ["src/**", "!src/lib"]
   },
-  "formatter": {
-    "bracketSameLine": false,
-    "expand": "auto"
-  },
   "linter": {
     "rules": {
       "correctness": {
@@ -22,11 +18,18 @@
       "style": {
         "noNestedTernary": "off",
         "noParameterProperties": "off",
-        "useConsistentMemberAccessibility": "off",
         "useConsistentTypeDefinitions": {
           "level": "warn",
           "options": {
             "style": "type"
+          }
+        }
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "warn",
+          "options": {
+            "functions": ["cn"]
           }
         }
       }
@@ -35,7 +38,8 @@
   "javascript": {
     "formatter": {
       "quoteStyle": "single",
-      "jsxQuoteStyle": "single"
+      "jsxQuoteStyle": "single",
+      "indentStyle": "space"
     }
   },
   "html": {
