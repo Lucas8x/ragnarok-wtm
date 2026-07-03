@@ -47,6 +47,10 @@
 }
 
 @theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: "Geist", "Geist Fallback", "Fredoka", sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", monospace;
+
   --color-main: var(--main);
   --color-background: var(--background);
   --color-secondary-background: var(--secondary-background);
@@ -92,6 +96,9 @@
   h5,
   h6 {
     @apply font-heading;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
