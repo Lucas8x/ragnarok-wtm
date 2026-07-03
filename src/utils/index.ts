@@ -29,7 +29,7 @@ export function calculateStreak(dates: Record<string, DailyItemStorage>) {
     } else {
       console.log(
         'Streak ended at:',
-        dayjs.utc(dateKey, 'DDMMYYYY').format('DD-MM-YYYY'),
+        dayjs.utc(dateKey, 'DDMMYYYY').format('DD-MM-YYYY')
       );
       break;
     }
@@ -51,5 +51,9 @@ console.log(
     '06022026': { attempts: [], completedOn: '2026-02-06' },
     '07022026': { attempts: [], completedOn: '2026-02-07' },
     '08022026': { attempts: [], completedOn: undefined },
-  }),
+  })
 );
+
+export function randomInt(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

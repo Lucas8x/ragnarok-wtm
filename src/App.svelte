@@ -9,6 +9,7 @@
   import Wordle from '$src/pages/wordle.svelte';
   import { route } from '$src/stores/router';
   import ThemeSwitch from './componentes/ThemeSwitch.svelte';
+  import BlockyBackground from './componentes/ui/BlockyBackground.svelte';
   import List from './pages/list.svelte';
 
   const titles: Record<string, string> = {
@@ -24,25 +25,27 @@
 <main class="flex w-full flex-col font-sans antialiased h-full">
   <!-- <ModeWatcher /> -->
 
-  <NavigationBar />
+  <BlockyBackground>
+    <NavigationBar />
 
-  <div class="flex w-full flex-1 justify-center">
-    <div class="w-full max-w-xl px-2">
-      {#if $route === '/'}
-        <Home />
-      {:else if $route === '/connoisseur'}
-        <Connoisseur />
-      {:else if $route === '/wordle'}
-        <Wordle />
-      {:else if $route === '/custom'}
-        <Custom />
-      {:else if process.env.NODE_ENV === 'development' && $route === '/list'}
-        <List />
-      {/if}
+    <div class="flex w-full flex-1 justify-center">
+      <div class="w-full max-w-xl px-2">
+        {#if $route === '/'}
+          <Home />
+        {:else if $route === '/connoisseur'}
+          <Connoisseur />
+        {:else if $route === '/wordle'}
+          <Wordle />
+        {:else if $route === '/custom'}
+          <Custom />
+        {:else if process.env.NODE_ENV === 'development' && $route === '/list'}
+          <List />
+        {/if}
+      </div>
     </div>
-  </div>
 
-  <Footer />
+    <Footer />
+  </BlockyBackground>
 
   <!-- <div class="absolute right-2 bottom-2">
     <ThemeSwitch />
