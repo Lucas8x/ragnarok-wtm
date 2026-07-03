@@ -4,7 +4,7 @@
 </script>
 
 <nav
-  class="flex items-center justify-center gap-4 border-b-4 bg-amber-600 p-4 text-white"
+  class="flex items-center justify-center gap-4 border-b-4 bg-orange-500 p-3 text-white"
 >
   <NavigationLink href="/">Daily</NavigationLink>
 
