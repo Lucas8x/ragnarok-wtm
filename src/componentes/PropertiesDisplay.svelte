@@ -7,34 +7,39 @@
     $props();
 </script>
 
-<div class="grid grid-cols-3 gap-2">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
   <PropertyItem
-    title="Level"
     icon={Zap}
+    result={comparasion.level}
     text={comparasion.attemptData?.level}
-    result={comparasion.level} />
+    title="Level"
+  />
 
   <PropertyItem
-    title="HP"
     icon={Heart}
+    result={comparasion.hp}
     text={comparasion.attemptData?.hp}
-    result={comparasion.hp} />
+    title="HP"
+  />
 
   <PropertyItem
-    title="Size"
     icon={Maximize2}
+    result={comparasion.size}
     text={comparasion.attemptData?.size}
-    result={comparasion.size} />
+    title="Size"
+  />
 
   <PropertyItem
-    title="Race"
     icon={Maximize2}
+    result={comparasion.race}
     text={comparasion.attemptData?.race}
-    result={comparasion.race} />
+    title="Race"
+  />
 
   <PropertyItem
-    title="Race"
     icon={Maximize2}
+    result={comparasion.element}
     text={comparasion.attemptData?.element}
-    result={comparasion.element} />
+    title="Race"
+  />
 </div>
