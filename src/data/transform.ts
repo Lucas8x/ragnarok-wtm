@@ -1,4 +1,5 @@
 import path from 'node:path';
+import readline from 'node:readline';
 import { file, write, YAML } from 'bun';
 import type { Monster } from '$src/@types';
 
@@ -77,10 +78,17 @@ function longestName() {
   }
 }
 
-//transformYmlToJson();
+const funcs = [transformYmlToJson, longestName, transformToObject, filterProps];
+const prompt = funcs.map((i, index) => `${index} - ${i.name}`).join('\n');
 
-longestName();
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-//transformToObject();
-
-//filterProps();
+rl.question(`${prompt}\n> `, (choice) => {
+  const index = Number(choice);
+  console.log(`Running: ${funcs[index].name}`);
+  funcs[index]();
+  rl.close();
+});
