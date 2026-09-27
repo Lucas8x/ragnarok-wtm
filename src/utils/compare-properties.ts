@@ -1,5 +1,5 @@
 import type { ComparasionIndicator, Monster } from '$src/@types';
-import monsters from '$src/data/monsters2.json';
+import { filteredDuplicateMonsters } from '.';
 
 type ComparePropertiesResult = {
   attemptData?: Monster;
@@ -25,14 +25,18 @@ function getIndicator(a?: number, b?: number): ComparasionIndicator {
 
 const sizeOrder = ['Small', 'Medium', 'Large'] as Monster['size'][];
 
+function getMonster(id: number | string): Monster {
+  return filteredDuplicateMonsters.find(
+    (i) => String(i.id) === String(id)
+  ) as Monster;
+}
+
 export function compareProperties(
   attemptID: number | string,
   targetID: number | string
 ): ComparePropertiesResult {
-  const attempt = monsters[attemptID as keyof typeof monsters] as Monster;
-  const target = monsters[targetID as keyof typeof monsters] as Monster;
-
-  console.log(attempt, target);
+  const attempt = getMonster(attemptID);
+  const target = getMonster(targetID);
 
   return {
     attemptData: attempt,

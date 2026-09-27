@@ -1,6 +1,6 @@
 import { PersistedState } from 'runed';
 import type { WordleItem, WordleItemStorage, WordleStatus } from '$src/@types';
-import monsters from '$src/data/monsters.json';
+import { filteredDuplicateMonsters } from '$src/utils';
 import { rankLetters } from '$src/utils/rankLetters';
 import { weightWord } from '$src/utils/weightWord';
 
@@ -30,12 +30,12 @@ class WordleState {
   status: WordleStatus = $state('playing');
   ranks = $derived(rankLetters(this.guesses));
 
-  secret: (typeof monsters)[number] | null = null;
-  filteredMonsters: typeof monsters = [];
+  secret: (typeof filteredDuplicateMonsters)[number] | null = null;
+  namesWithTargetLength: typeof filteredDuplicateMonsters = [];
 
   checkWordExists(name: string): boolean {
     const guessName = name.toLowerCase();
-    return this.filteredMonsters.some(
+    return this.namesWithTargetLength.some(
       (m) => m.name.toLowerCase() === guessName
     );
   }
@@ -75,10 +75,10 @@ class WordleState {
   }
 
   pickSecret() {
-    const namesWithTargetLength = monsters.filter(
+    const namesWithTargetLength = filteredDuplicateMonsters.filter(
       (m) => m.name.length === this.nameLength
     );
-    this.filteredMonsters = namesWithTargetLength;
+    this.namesWithTargetLength = namesWithTargetLength;
 
     const randomIndex = Math.floor(
       Math.random() * namesWithTargetLength.length
@@ -89,7 +89,7 @@ class WordleState {
     console.log('[WORDLE] Secret monster:', this.secret.name);
     console.log(
       '[WORDLE]',
-      this.filteredMonsters
+      this.namesWithTargetLength
         .slice(0, this.nameLength + 1)
         .flatMap((m) => m.name)
         .join(', ')

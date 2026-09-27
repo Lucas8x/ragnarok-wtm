@@ -1,7 +1,7 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import Bun from 'bun';
-import monsters from '$src/data/monsters.json';
+import { filteredDuplicateMonsters } from '$src/utils';
 
 const assetsDir = join(import.meta.dir, '..', 'assets', 'sprites');
 
@@ -18,7 +18,9 @@ const files = readdirSync(assetsDir, {
 
 console.log('Total files in assets/sprites:', files.length);
 
-const monstersIDs = monsters.map((monster) => String(monster.id));
+const monstersIDs = filteredDuplicateMonsters.map((monster) =>
+  String(monster.id)
+);
 console.log('Total monster IDs in monsters.json:', monstersIDs.length);
 
 const unusedFiles = files.filter((file) => !monstersIDs.includes(file.id));
@@ -29,7 +31,7 @@ if (unusedFiles.length > 0) {
     const filePath = join(assetsDir, file.name);
     Bun.file(filePath).delete();
   }
-  console.log('Unused files deleted successfully.');
+  console.log(`${unusedFiles.length} Unused files deleted successfully.`);
 } else {
   console.log('No unused files to delete.');
 }
@@ -37,6 +39,6 @@ const diff = monstersIDs.length - (files.length - unusedFiles.length);
 
 if (diff > 0) {
   console.warn(
-    `Missing ${diff} sprites for monsters in monsters.json may indicate incomplete assets.`,
+    `Missing ${diff} sprites for monsters in monsters.json may indicate incomplete assets.`
   );
 }

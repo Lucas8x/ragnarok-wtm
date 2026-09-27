@@ -1,14 +1,14 @@
-import monsters from '$src/data/monsters.json';
+import { filteredDuplicateMonsters } from '$src/utils';
 
-const names = monsters.map((monster) => monster.name);
+const names = filteredDuplicateMonsters.map((monster) => monster.name);
 
 const lengthsCount: Record<number | string, number> = {};
 
 for (const name of names) {
-  const length = name.length;
+  const { length } = name;
 
   if (lengthsCount[length]) {
-    lengthsCount[length]++;
+    lengthsCount[length] += 1;
   } else {
     lengthsCount[length] = 1;
   }

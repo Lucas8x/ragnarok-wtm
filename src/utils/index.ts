@@ -1,12 +1,11 @@
 import type { DailyItemStorage } from '$src/@types';
+import ignoreIds from '$src/data/ignoreIDs.json';
+import monsters from '$src/data/monsters.json';
 import { dayjs } from '$src/utils/dayjs';
 
-export const spritesImages = import.meta.glob('/src/assets/sprites/*.png', {
-  import: 'default',
-  query: {
-    enhanced: true,
-  },
-}) as Record<string, () => Promise<string>>;
+export const filteredDuplicateMonsters = monsters.filter(
+  (i) => !ignoreIds.includes(i.id)
+);
 
 export function calculateStreak(dates: Record<string, DailyItemStorage>) {
   const today = dayjs.utc();
@@ -43,7 +42,7 @@ export function calculateStreak(dates: Record<string, DailyItemStorage>) {
   };
 }
 
-console.log(
+/* console.log(
   'streak:',
   calculateStreak({
     '02022026': { attempts: [], completedOn: '2026-02-02' },
@@ -52,7 +51,7 @@ console.log(
     '07022026': { attempts: [], completedOn: '2026-02-07' },
     '08022026': { attempts: [], completedOn: undefined },
   })
-);
+); */
 
 export function randomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

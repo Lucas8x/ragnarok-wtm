@@ -9,7 +9,7 @@
     CommandItem,
     CommandList,
   } from '$lib/components/ui/command';
-  import monsters from '../data/monsters.json';
+  import { filteredDuplicateMonsters } from '$src/utils';
 
   let {
     scored = false,
@@ -22,7 +22,7 @@
   } = $props();
 
   let filtered = $derived(
-    monsters
+    filteredDuplicateMonsters
       .filter((item) =>
         item.name.toLowerCase().startsWith(search.toLowerCase())
       )
@@ -33,9 +33,9 @@
 <div class="flex gap-2">
   <Command class="bg-white " shouldFilter={false}>
     <CommandInput
-      bind:value={search}
-      placeholder={scored ? 'You got it!' : 'Guess a monster...'}
       disabled={scored}
+      placeholder={scored ? 'You got it!' : 'Guess a monster...'}
+      bind:value={search}
     />
 
     <CommandList>
