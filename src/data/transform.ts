@@ -29,20 +29,6 @@ async function transformYmlToJson() {
   );
 }
 
-async function transformToObject() {
-  const data = {};
-
-  for (const monster of monsters as Monster[]) {
-    const { id, ...rest } = monster;
-    data[id] = rest;
-  }
-
-  await write(
-    path.join(import.meta.dir, 'monsters2.json'),
-    JSON.stringify(data, null)
-  );
-}
-
 async function filterProps() {
   const races = new Set<string | undefined>();
   const elements = new Set<string | undefined>();
@@ -78,7 +64,7 @@ function longestName() {
   }
 }
 
-const funcs = [transformYmlToJson, longestName, transformToObject, filterProps];
+const funcs = [transformYmlToJson, longestName, filterProps];
 const prompt = funcs.map((i, index) => `${index} - ${i.name}`).join('\n');
 
 const rl = readline.createInterface({
