@@ -1,10 +1,8 @@
 <script lang="ts">
   import { LoaderCircle } from '@lucide/svelte/icons';
-  import { onMount } from 'svelte';
   import { Card, CardContent } from '$lib/components/ui/card';
   import { cn } from '$lib/utils.js';
   import { compareProperties } from '$src/utils/compare-properties';
-  import { spritesImages } from '$src/utils/sprite-helper';
   import PropertiesDisplay from './PropertiesDisplay.svelte';
 
   let {
@@ -15,14 +13,8 @@
     correctID: number;
   } = $props();
 
-  let imgSrc: string | null = $state(null);
   let isLoading = $state(true);
   let imgError = $state(false);
-
-  onMount(async () => {
-    const key = `/src/assets/sprites/${monsterID}.png`;
-    imgSrc = await spritesImages[key]();
-  });
 
   const comparasion = $derived(compareProperties(monsterID, correctID));
 </script>
@@ -35,8 +27,8 @@
   data-monster-id={monsterID}
 >
   <Card class="flex h-25 w-19 p-2">
-    <CardContent class="px-1 py-4" data-spriteId={monsterID}>
-      {#if imgSrc && !imgError}
+    <CardContent class="px-1 py-4">
+      {#if !imgError}
         <enhanced:img
           alt={comparasion.attemptData?.name ?? '?'}
           class={cn('size-12 object-contain', { 'opacity-0': isLoading })}
@@ -47,7 +39,7 @@
           onload={() => {
             isLoading = false
           }}
-          src={imgSrc}
+          src={`/sprites/${monsterID}.png`}
         />
       {/if}
 

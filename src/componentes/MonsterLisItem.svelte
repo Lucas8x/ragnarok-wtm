@@ -42,21 +42,21 @@
     </CardHeader>
 
     <enhanced:img
+      alt=""
       class={cn('size-12 object-contain', {
         'opacity-50': isIgnored,
       })}
-      src={`/src/assets/sprites/${id}.png`}
-      alt=""
+      src={`/sprites/${id}.png`}
     />
 
     <CardFooter>
       <Button
-        type="button"
         class={cn('not-disabled:cursor-pointer', {
           'bg-neo-green': isIgnored,
           'bg-neo-red': !isIgnored,
         })}
         onclick={onToggle}
+        type="button"
       >
         {isIgnored ? 'Restore' : 'Ignore'}
       </Button>

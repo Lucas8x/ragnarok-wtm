@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import Bun from 'bun';
 import { filteredDuplicateMonsters } from '$src/utils';
 
-const assetsDir = join(import.meta.dir, '..', 'assets', 'sprites');
+const assetsDir = join(import.meta.dir, '..', '..', 'public', 'sprites');
 
 const files = readdirSync(assetsDir, {
   withFileTypes: true,
