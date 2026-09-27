@@ -30,7 +30,7 @@ class WordleState {
   status: WordleStatus = $state('playing');
   ranks = $derived(rankLetters(this.guesses));
 
-  secret: { id: number; name: string } = { id: 0, name: '' };
+  secret: (typeof monsters)[number] | null = null;
   filteredMonsters: typeof monsters = [];
 
   checkWordExists(name: string): boolean {
@@ -41,6 +41,10 @@ class WordleState {
   }
 
   submitGuess(onUnknown: () => void) {
+    if (this.secret === null) {
+      console.error('wordle secret wasnt chosen.');
+      return;
+    }
     if (this.guesses.length === 0) {
       return;
     }
@@ -79,8 +83,8 @@ class WordleState {
     const randomIndex = Math.floor(
       Math.random() * namesWithTargetLength.length
     );
-    const { id, name } = namesWithTargetLength[randomIndex];
-    this.secret = { id, name: name.toLowerCase() };
+    const monster = namesWithTargetLength[randomIndex];
+    this.secret = { ...monster, name: monster.name.toLowerCase() };
 
     console.log('[WORDLE] Secret monster:', this.secret.name);
     console.log(

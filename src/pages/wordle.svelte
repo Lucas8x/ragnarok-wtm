@@ -1,11 +1,11 @@
 <script lang="ts">
-  import type { WordleItem, WordleStatus } from '$src/@types';
+  import type { WordleItem } from '$src/@types';
   import Keyboard from '$src/componentes/Keyboard.svelte';
   import TimedToast from '$src/componentes/TimedToast.svelte';
   import WordleGrid from '$src/componentes/WordleGrid.svelte';
+  import WordleHints from '$src/componentes/WordleHints.svelte';
   import { wordleGame } from '$src/stores/wordle-store.svelte';
   import { rankLetters } from '$src/utils/rankLetters';
-  import { weightWord } from '$src/utils/weightWord';
 
   const ALPHABET_REGEX = /^[a-z]$/i;
 
@@ -78,6 +78,7 @@
       : 'Guess the monster!'}
   </p>
 
+  <WordleHints />
   <WordleGrid />
 
   {#if unknownWordAlertVisible}
