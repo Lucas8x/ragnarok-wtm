@@ -18,6 +18,8 @@ export type WordleItem = {
 
 export type WordleItemStorage = {};
 
+export type WordleStatus = 'playing' | 'over' | 'scored';
+
 // Others
 
 export type Monster = {
