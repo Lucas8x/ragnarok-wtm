@@ -3,8 +3,8 @@
   import { onMount } from 'svelte';
   import { Card, CardContent } from '$lib/components/ui/card';
   import { cn } from '$lib/utils.js';
-  import { spritesImages } from '$src/utils';
   import { compareProperties } from '$src/utils/compare-properties';
+  import { spritesImages } from '$src/utils/sprite-helper';
   import PropertiesDisplay from './PropertiesDisplay.svelte';
 
   let {
@@ -44,7 +44,9 @@
             isLoading = false;
             imgError = true;
           }}
-          onload={() => (isLoading = false)}
+          onload={() => {
+            isLoading = false
+          }}
           src={imgSrc}
         />
       {/if}
