@@ -1,6 +1,8 @@
 {
-  "page_title": "Advinhe o Monstro",
+  "page_title_home": "Advinhe o Monstro",
   "page_title_connoisseur": "Especialista em Monstros",
   "page_title_wordle": "Monstro Wordle",
-  "page_title_custom": "Advinhe o Monstro"
+  "page_title_custom": "Advinhe o Monstro",
+  "page_title_list": "Lista dos Monstros",
+  "page_title_404": "404 - Página Não Encontrada"
 }

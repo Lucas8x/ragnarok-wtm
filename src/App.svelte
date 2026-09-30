@@ -4,67 +4,41 @@
   import { _ } from 'svelte-i18n';
   import Footer from '$src/componentes/Footer.svelte';
   import NavigationBar from '$src/componentes/NavigationBar.svelte';
+  import { PAGES_CONFIG } from '$src/pages/pages';
   import { route } from '$src/stores/router';
   import ThemeSwitch from './componentes/ThemeSwitch.svelte';
   import BlockyBackground from './componentes/ui/BlockyBackground.svelte';
-
-  const titles: Record<string, string> = {
-    '/': 'page_title',
-    '/connoisseur': 'page_title_connoisseur',
-    '/custom': 'page_title_custom',
-    '/wordle': 'page_title_wordle',
-  };
-
-  const pageModules = {
-    '/': () => import('$src/pages/main.svelte').then((m) => m.default),
-    //'/connoisseur': () => import('$src/pages/connoisseur.svelte').then((m) => m.default),
-    '/wordle': () => import('$src/pages/wordle.svelte').then((m) => m.default),
-    //'/custom': () => import('$src/pages/custom.svelte').then((m) => m.default),
-  };
+  import { loadPageComponent } from './utils/loadPageComponent';
 
   let ComponentPage = $state<Component>();
-  let isLoading = $state(false);
 
   const canViewTransition =
     typeof document !== 'undefined' && 'startViewTransition' in document;
 
-  const isDev = process.env.NODE_ENV === 'development';
-
-  async function loadPage(routePath: string) {
-    isLoading = true;
-
-    async function loadComponent() {
-      if (isDev && routePath === '/list') {
-        const module = await import('$src/pages/list.svelte');
-        return module.default;
-      }
-
-      if (routePath in pageModules) {
-        return pageModules[routePath as keyof typeof pageModules]();
-      }
-
-      const module = await import('$src/pages/error.svelte');
-      return module.default;
-    }
-
+  async function changeRoute(routePath: string) {
     if (canViewTransition) {
       document.startViewTransition(async () => {
-        ComponentPage = await loadComponent();
+        ComponentPage = await loadPageComponent(routePath);
       });
     } else {
-      ComponentPage = await loadComponent();
+      ComponentPage = await loadPageComponent(routePath);
     }
-
-    isLoading = false;
   }
 
   $effect(() => {
-    loadPage($route);
+    changeRoute($route);
   });
 </script>
 
 <svelte:head>
-  <title>{$_(titles[$route]) || '404'} - Ragnarok</title>
+  {#if $route in PAGES_CONFIG}
+    <title>
+      {$_(PAGES_CONFIG[$route as keyof typeof PAGES_CONFIG].titleID)}
+      - Ragnarok
+    </title>
+  {:else}
+    <title>{$_('page_title_404')} - Ragnarok</title>
+  {/if}
 </svelte:head>
 
 <main class="flex h-full w-full flex-col font-sans antialiased">
@@ -75,13 +49,7 @@
 
     <div class="flex w-full flex-1 justify-center">
       <div class="page-transition-container w-full max-w-xl px-2">
-        {#if ComponentPage}
-          <ComponentPage />
-        {:else if isLoading}
-          <div class="flex h-64 items-center justify-center">
-            <div>Loading...</div>
-          </div>
-        {/if}
+        <ComponentPage />
       </div>
     </div>
 
