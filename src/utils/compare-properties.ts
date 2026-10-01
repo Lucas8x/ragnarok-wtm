@@ -2,7 +2,7 @@ import type { ComparasionIndicator, Monster } from '$src/@types';
 import { filteredDuplicateMonsters } from '.';
 
 type ComparePropertiesResult = {
-  attemptData?: Monster;
+  attemptData: Monster | undefined;
   level: ComparasionIndicator;
   hp: ComparasionIndicator;
   race: ComparasionIndicator;
@@ -25,10 +25,8 @@ function getIndicator(a?: number, b?: number): ComparasionIndicator {
 
 const sizeOrder = ['Small', 'Medium', 'Large'] as Monster['size'][];
 
-function getMonster(id: number | string): Monster {
-  return filteredDuplicateMonsters.find(
-    (i) => String(i.id) === String(id)
-  ) as Monster;
+function getMonster(id: number | string) {
+  return filteredDuplicateMonsters.find((i) => String(i.id) === String(id));
 }
 
 export function compareProperties(
@@ -39,14 +37,14 @@ export function compareProperties(
   const target = getMonster(targetID);
 
   return {
-    attemptData: attempt,
+    attemptData: attempt as Monster | undefined,
     level: getIndicator(attempt?.level, target?.level),
     hp: getIndicator(attempt?.hp, target?.hp),
     race: attempt?.race === target?.race,
     element: attempt?.element === target?.element,
     size: getIndicator(
-      sizeOrder.indexOf(attempt?.size),
-      sizeOrder.indexOf(target?.size)
+      sizeOrder.indexOf(attempt?.size as Monster['size']),
+      sizeOrder.indexOf(target?.size as Monster['size'])
     ),
   };
 }
