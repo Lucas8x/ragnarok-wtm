@@ -26,14 +26,14 @@
 
 <div
   class={cn(
-    'shadow-shadow repeat-infinite absolute border-3 border-black ease-in-out',
+    'repeat-infinite absolute border-3 border-black shadow-shadow ease-in-out',
     {
       'bg-white': color === 0,
       'bg-neo-blue': color === 1,
       'bg-neo-pink': color === 2,
       'bg-neo-green': color === 3,
       'bg-neo-yellow': color === 4,
-    },
+    }
   )}
   style:--r1={styleVars.r1}
   style:--r2={styleVars.r2}

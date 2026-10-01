@@ -37,7 +37,7 @@
             imgError = true;
           }}
           onload={() => {
-            isLoading = false
+            isLoading = false;
           }}
           src={`/sprites/${monsterID}.png`}
         />
@@ -48,7 +48,7 @@
       {/if}
 
       {#if imgError}
-        <div class=" flex size-20 h-full w-full items-center justify-center">
+        <div class="flex size-20 h-full w-full items-center justify-center">
           <span>?</span>
         </div>
       {/if}
@@ -56,7 +56,7 @@
   </Card>
 
   <div class="flex w-full flex-col gap-2">
-    <p class="text-center font-bold">{comparasion.attemptData?.name}</p>
+    <p class="text-center font-bold">{comparasion.attemptData?.name ?? '?'}</p>
     <PropertiesDisplay {comparasion} />
   </div>
 </li>

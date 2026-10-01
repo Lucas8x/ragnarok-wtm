@@ -6,11 +6,11 @@ import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
+  plugins: [tailwindcss(), enhancedImages(), svelte()],
   resolve: {
     alias: {
       $lib: path.resolve('./src/lib'),
       $src: path.resolve('./src'),
     },
   },
-  plugins: [tailwindcss(), enhancedImages(), svelte()],
 });

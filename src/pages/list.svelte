@@ -24,11 +24,11 @@
   <Button
     class="cursor-pointer"
     onclick={() => {
-    navigator.clipboard.writeText(JSON.stringify(ignored)).then(() => {
-      // biome-ignore lint/suspicious/noAlert: <dev>
-      alert('copied');
-    });
-  }}
+      navigator.clipboard.writeText(JSON.stringify(ignored)).then(() => {
+        // biome-ignore lint/suspicious/noAlert: <dev>
+        alert('copied');
+      });
+    }}
     type="button"
   >
     Copy JSON

@@ -27,18 +27,18 @@ export const getGameData = (urlDate: string) => {
   const dateGameKey = gameDate.format(dateFormat);
 
   console.log({
-    gameDate,
     dateGameKey,
+    gameDate,
   });
 
   return {
+    attempts: state.current[dateGameKey]?.attempts ?? [],
+    correctID: getDailyMonsterID(gameDate),
+    dateGameKey,
     gameDate,
     isPastDate: gameDate.isBefore(dayjs.utc(), 'day'),
-    dateGameKey,
-    attempts: state.current[dateGameKey]?.attempts ?? [],
     scored: state.current[dateGameKey]?.completedOn !== undefined,
     streak: calculateStreak(state.current),
-    correctID: getDailyMonsterID(gameDate),
   };
 };
 
@@ -56,8 +56,8 @@ export function handleGuess(gameDate: string, monsterID: number) {
   }
 
   state.current[gameDate] = {
-    attempts: [monsterID, ...(state.current[gameDate]?.attempts || [])],
     answerID: undefined,
+    attempts: [monsterID, ...(state.current[gameDate]?.attempts || [])],
     completedOn: undefined,
   };
 

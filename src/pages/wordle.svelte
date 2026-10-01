@@ -72,10 +72,10 @@
     class="neo-border font-extrabold bg-yellow-400 shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2 mb-2"
   >
     {wordleGame.status === 'over'
-    ? 'This game is over'
-    : wordleGame.status === 'scored'
-      ? 'You got it'
-      : 'Guess the monster!'}
+      ? 'This game is over'
+      : wordleGame.status === 'scored'
+        ? 'You got it'
+        : 'Guess the monster!'}
   </p>
 
   <WordleHints />

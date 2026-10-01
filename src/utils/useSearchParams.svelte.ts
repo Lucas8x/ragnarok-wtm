@@ -2,7 +2,7 @@ import { type Writable, writable } from 'svelte/store';
 
 export function useSearchParams<T = string>(
   key: string,
-  defaultValue: T,
+  defaultValue: T
 ): Writable<T> & {
   setParam: (value: T) => void;
   refresh: () => void;

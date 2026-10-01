@@ -6,7 +6,7 @@
   );
 </script>
 
-{#if submittedCount >0}
+{#if submittedCount > 0}
   <div class="flex items-center justify-center gap-2 mt-1 mb-2">
     <p class="font-bold">Hints:</p>
 

@@ -14,7 +14,8 @@
             'neo-border flex size-16 items-center justify-center bg-orange-50 transition ease-in-out',
             {
               'shadow-shadow':
-                wordleGame.guesses[i]?.submitted || wordleGame.guesses[i]?.text[j],
+                wordleGame.guesses[i]?.submitted ||
+                wordleGame.guesses[i]?.text[j],
               'bg-neo-green': wordleGame.guesses[i]?.validation[j] === 2,
               'bg-neo-yellow': wordleGame.guesses[i]?.validation[j] === 1,
               'bg-gray-400': wordleGame.guesses[i]?.validation[j] === 0,

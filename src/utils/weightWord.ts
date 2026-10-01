@@ -6,7 +6,7 @@ export function weightWord(target: string, guess: string): number[] {
     freq[char] = (freq[char] || 0) + 1;
   }
 
-  for (let i = 0; i < guess.length; i += 1) {
+  for (let i = 0; i < guess.length; i++) {
     const char = guess[i];
 
     if (char === target[i]) {
@@ -15,7 +15,7 @@ export function weightWord(target: string, guess: string): number[] {
     }
   }
 
-  for (let i = 0; i < guess.length; i += 1) {
+  for (let i = 0; i < guess.length; i++) {
     if (result[i]) {
       continue;
     }

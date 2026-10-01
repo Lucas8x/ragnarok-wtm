@@ -1,3 +1,4 @@
+// biome-ignore lint/style/noExportedImports: <dayjs with plugins>
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import utc from 'dayjs/plugin/utc';

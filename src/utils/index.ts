@@ -24,7 +24,7 @@ export function calculateStreak(dates: Record<string, DailyItemStorage>) {
       dates[dateKey]?.completedOn ===
       today.subtract(i, 'day').format('YYYY-MM-DD')
     ) {
-      streak++;
+      streak += 1;
     } else {
       console.log(
         'Streak ended at:',
