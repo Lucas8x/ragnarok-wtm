@@ -8,7 +8,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["src/**", "!src/lib"]
+    "includes": ["src/**", "!src/lib", "!public", "!src/assets"]
   },
   "linter": {
     "rules": {
@@ -23,14 +23,20 @@
           "options": {
             "style": "type"
           }
+        },
+        "useFilenamingConvention": {
+          "level": "off"
+        },
+        "noIncrementDecrement": {
+          "level": "on",
+          "options": {
+            "allowForLoopAfterthoughts": true
+          }
         }
       },
       "nursery": {
         "useSortedClasses": {
-          "level": "warn",
-          "options": {
-            "functions": ["cn"]
-          }
+          "level": "info"
         }
       }
     }
@@ -56,7 +62,9 @@
     "enabled": true,
     "actions": {
       "source": {
-        "organizeImports": "on"
+        "organizeImports": "on",
+        "useSortedKeys": "off",
+        "useSortedPackageJson": "off"
       }
     }
   }
