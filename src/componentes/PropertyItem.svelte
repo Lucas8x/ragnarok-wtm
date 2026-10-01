@@ -1,13 +1,12 @@
 <script lang="ts">
   import { ArrowDown, ArrowUp, Check } from '@lucide/svelte/icons';
-  import {} from '$lib/components/ui/card';
   import { cn } from '$lib/utils';
   import type { ComparasionIndicator } from '$src/@types';
 
   let {
     title,
     text = '?',
-    icon,
+    icon: Icon,
     result,
   }: {
     title: string;
@@ -33,7 +32,7 @@
         <ArrowDown class="size-5" />
       {/if}
     {:else}
-      <Check class="size-5" />
+      <Check class="size-5" stroke-width="3" />
     {/if}
   {/if}
 
@@ -41,4 +40,8 @@
     <span>{title.toUpperCase()}</span>
     <span>{text}</span>
   </div>
+
+  <!-- <div class="">
+    <Icon />
+  </div> -->
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Heart, Maximize2, Zap } from '@lucide/svelte/icons';
+  import { Atom, Dna, Heart, Maximize2, Zap } from '@lucide/svelte/icons';
   import type { compareProperties } from '$src/utils/compare-properties';
   import PropertyItem from './PropertyItem.svelte';
 
@@ -30,16 +30,16 @@
   />
 
   <PropertyItem
-    icon={Maximize2}
+    icon={Dna}
     result={comparasion.race}
     text={comparasion.attemptData?.race}
     title="Race"
   />
 
   <PropertyItem
-    icon={Maximize2}
+    icon={Atom}
     result={comparasion.element}
     text={comparasion.attemptData?.element}
-    title="Race"
+    title="Element"
   />
 </div>
