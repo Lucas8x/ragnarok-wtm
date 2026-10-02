@@ -25,7 +25,7 @@
 </script>
 
 <Card
-  class={cn({
+  class={cn('max-w-40', {
     'border-2 border-red-500': isDuplicate,
   })}
 >
@@ -37,7 +37,14 @@
         'opacity-50': isIgnored,
       })}
     >
-      <span class="font-bold">{id}</span>
+      <a
+        class="font-bold"
+        href={`https://www.divine-pride.net/database/monster/${id}`}
+        target="_blank"
+        title="DivinePride DB Link"
+      >
+        {id}
+      </a>
       <p class="text-center text-balance">{name}</p>
     </CardHeader>
 
