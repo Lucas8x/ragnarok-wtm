@@ -25,13 +25,7 @@ export const getGameData = (urlDate: string) => {
     : dayjs.utc();
 
   const dateGameKey = gameDate.format(dateFormat);
-
-  console.log({
-    dateGameKey,
-    gameDate,
-  });
-
-  return {
+  const data = {
     attempts: state.current[dateGameKey]?.attempts ?? [],
     correctID: getDailyMonsterID(gameDate),
     dateGameKey,
@@ -40,6 +34,12 @@ export const getGameData = (urlDate: string) => {
     scored: state.current[dateGameKey]?.completedOn !== undefined,
     streak: calculateStreak(state.current),
   };
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[DAILY] ', data);
+  }
+
+  return data;
 };
 
 export function handleGuess(gameDate: string, monsterID: number) {

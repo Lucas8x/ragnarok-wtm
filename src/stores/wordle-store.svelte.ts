@@ -86,14 +86,16 @@ class WordleState {
     const monster = namesWithTargetLength[randomIndex];
     this.secret = { ...monster, name: monster.name.toLowerCase() };
 
-    console.log('[WORDLE] Secret monster:', this.secret.name);
-    console.log(
-      '[WORDLE]',
-      this.namesWithTargetLength
-        .slice(0, this.nameLength + 1)
-        .flatMap((m) => m.name)
-        .join(', ')
-    );
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[WORDLE] Secret monster:', this.secret.name);
+      console.log(
+        '[WORDLE]',
+        this.namesWithTargetLength
+          .slice(0, this.nameLength + 1)
+          .flatMap((m) => m.name)
+          .join(' | ')
+      );
+    }
   }
 
   changeWordleLength(length: number) {
