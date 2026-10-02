@@ -26,7 +26,7 @@ export function groupSameName() {
   );
 
   for (const name in equivalentIds) {
-    if (equivalentIds[name].otherIds.length <= 1) {
+    if (equivalentIds[name].otherIds.length === 0) {
       delete equivalentIds[name];
     }
   }
