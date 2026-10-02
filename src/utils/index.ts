@@ -3,7 +3,7 @@ import ignoreIds from '$src/data/ignoreIDs.json';
 import monsters from '$src/data/monsters.json';
 import { dayjs } from '$src/utils/dayjs';
 
-export const filteredDuplicateMonsters = monsters.filter(
+export const monsterWithIgnoreFilter = monsters.filter(
   (i) => !ignoreIds.includes(i.id)
 );
 

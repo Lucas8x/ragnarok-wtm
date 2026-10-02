@@ -1,7 +1,7 @@
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import Bun from 'bun';
-import { filteredDuplicateMonsters } from '$src/utils';
+import { monsterWithIgnoreFilter } from '$src/utils';
 
 const assetsDir = join(import.meta.dir, '..', '..', 'public', 'sprites');
 
@@ -18,7 +18,7 @@ const files = readdirSync(assetsDir, {
 
 console.log('Total files in assets/sprites:', files.length);
 
-const monstersIDs = filteredDuplicateMonsters.map((monster) =>
+const monstersIDs = monsterWithIgnoreFilter.map((monster) =>
   String(monster.id)
 );
 console.log('Total monster IDs in monsters.json:', monstersIDs.length);
@@ -35,6 +35,7 @@ if (unusedFiles.length > 0) {
 } else {
   console.log('No unused files to delete.');
 }
+
 const diff = monstersIDs.length - (files.length - unusedFiles.length);
 
 if (diff > 0) {

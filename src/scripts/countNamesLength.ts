@@ -1,6 +1,6 @@
-import { filteredDuplicateMonsters } from '$src/utils';
+import { monsterWithIgnoreFilter } from '$src/utils';
 
-const names = filteredDuplicateMonsters.map((monster) => monster.name);
+const names = monsterWithIgnoreFilter.map((monster) => monster.name);
 
 const lengthsCount: Record<number | string, number> = {};
 

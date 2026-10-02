@@ -1,6 +1,6 @@
 import { PersistedState } from 'runed';
 import type { WordleItem, WordleItemStorage, WordleStatus } from '$src/@types';
-import { filteredDuplicateMonsters } from '$src/utils';
+import { monsterWithIgnoreFilter } from '$src/utils';
 import { rankLetters } from '$src/utils/rankLetters';
 import { weightWord } from '$src/utils/weightWord';
 
@@ -30,8 +30,8 @@ class WordleState {
   status: WordleStatus = $state('playing');
   ranks = $derived(rankLetters(this.guesses));
 
-  secret: (typeof filteredDuplicateMonsters)[number] | null = null;
-  namesWithTargetLength: typeof filteredDuplicateMonsters = [];
+  secret: (typeof monsterWithIgnoreFilter)[number] | null = null;
+  namesWithTargetLength: typeof monsterWithIgnoreFilter = [];
 
   checkWordExists(name: string): boolean {
     const guessName = name.toLowerCase();
@@ -75,7 +75,7 @@ class WordleState {
   }
 
   pickSecret() {
-    const namesWithTargetLength = filteredDuplicateMonsters.filter(
+    const namesWithTargetLength = monsterWithIgnoreFilter.filter(
       (m) => m.name.length === this.nameLength
     );
     this.namesWithTargetLength = namesWithTargetLength;

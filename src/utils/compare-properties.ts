@@ -1,5 +1,5 @@
 import type { ComparasionIndicator, Monster } from '$src/@types';
-import { filteredDuplicateMonsters } from '.';
+import { monsterWithIgnoreFilter } from '.';
 
 type ComparePropertiesResult = {
   attemptData: Monster | undefined;
@@ -26,7 +26,7 @@ function getIndicator(a?: number, b?: number): ComparasionIndicator {
 const sizeOrder = ['Small', 'Medium', 'Large'] as Monster['size'][];
 
 function getMonster(id: number | string) {
-  return filteredDuplicateMonsters.find((i) => String(i.id) === String(id));
+  return monsterWithIgnoreFilter.find((i) => String(i.id) === String(id));
 }
 
 export function compareProperties(

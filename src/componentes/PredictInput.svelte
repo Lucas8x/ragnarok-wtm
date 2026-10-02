@@ -9,7 +9,7 @@
     CommandItem,
     CommandList,
   } from '$lib/components/ui/command';
-  import { filteredDuplicateMonsters } from '$src/utils';
+  import { monsterWithIgnoreFilter } from '$src/utils';
 
   let {
     scored = false,
@@ -22,7 +22,7 @@
   } = $props();
 
   let filtered = $derived(
-    filteredDuplicateMonsters
+    monsterWithIgnoreFilter
       .filter((item) =>
         item.name.toLowerCase().startsWith(search.toLowerCase())
       )
