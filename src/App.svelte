@@ -47,8 +47,8 @@
   <BlockyBackground>
     <NavigationBar />
 
-    <div class="flex w-full flex-1 justify-center">
-      <div class="page-transition-container w-full max-w-xl px-2">
+    <div class="flex w-full flex-1">
+      <div class="page-transition-container w-full px-2">
         <ComponentPage />
       </div>
     </div>
