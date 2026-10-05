@@ -1,11 +1,12 @@
 import path from 'node:path';
+import process from 'node:process';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
-// https://vite.dev/config/
 export default defineConfig({
+  base: process.env.GITHUB_ACTIONS === 'true' ? '/ragnarok-wtm/' : '/',
   plugins: [tailwindcss(), enhancedImages(), svelte()],
   resolve: {
     alias: {

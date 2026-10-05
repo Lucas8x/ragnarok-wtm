@@ -1,8 +1,9 @@
 <script lang="ts">
   import { cn } from '$lib/utils';
-  import { route } from '$src/stores/router';
+  import { route, toAppPath } from '$src/stores/router';
 
   let { href = '/', children } = $props();
+  const appHref = $derived(toAppPath(href));
 
   function onclick(event: MouseEvent) {
     if (
@@ -22,7 +23,7 @@
       return;
     }
 
-    window.history.pushState(null, '', href);
+    window.history.pushState(null, '', appHref);
     route.set(href);
   }
 </script>
@@ -35,7 +36,7 @@
       'font-bold': $route === href,
     }
   )}
-  {href}
+  href={appHref}
   {onclick}
 >
   {@render children?.()}
