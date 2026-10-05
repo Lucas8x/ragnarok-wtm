@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { Send } from '@lucide/svelte/icons';
-  import { Button } from '$lib/components/ui/button';
   import {
     Command,
     CommandEmpty,
@@ -30,18 +28,20 @@
   );
 </script>
 
-<div class="flex gap-2">
-  <Command class="bg-white " shouldFilter={false}>
+<div class="relative h-12">
+  <Command class="relative overflow-visible bg-white" shouldFilter={false}>
     <CommandInput
       disabled={scored}
       placeholder={scored ? 'You got it!' : 'Guess a monster...'}
       bind:value={search}
     />
 
-    <CommandList>
+    <CommandList
+      class="absolute left-0 right-0 top-full z-1 border border-t-0 bg-white"
+    >
       {#if search.trim().length > 0 && filtered.length > 0}
         <CommandGroup>
-          {#each filtered as monster}
+          {#each filtered as monster (monster.id)}
             <CommandItem onSelect={() => onSelect(monster.id)}>
               <span>{monster.name}</span>
             </CommandItem>
@@ -52,11 +52,4 @@
       {/if}
     </CommandList>
   </Command>
-
-  <!-- <button
-    type="submit"
-    disabled={!search || !search.trim()}
-    class="bg-neo-green neo-border neo-shadow px-6 py-3 transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[4px_4px_0px_0px_oklch(0.15_0_0)]">
-    <Send className="w-6 h-6 text-foreground" />
-  </button> -->
 </div>
