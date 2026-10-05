@@ -45,13 +45,13 @@ function daysSinceEpoch(date = dayjs.utc()) {
   return date.startOf('day').diff(epoch.startOf('day'), 'day');
 }
 
-export function getDailyMonsterID(date = dayjs.utc()) {
+export function getDailyMonster(date = dayjs.utc()) {
   const d = daysSinceEpoch(date);
   const seed = cyrb53(String(d));
   const rnd = mulberry32(seed);
 
   const idx = Math.floor(rnd() * monsters.length);
-  return monsters[idx].id;
+  return monsters[idx];
 }
 
 /* [...Array(20)].forEach((i, index) => {

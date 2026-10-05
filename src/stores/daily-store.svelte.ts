@@ -2,7 +2,7 @@ import { PersistedState } from 'runed';
 import type { DailyItemStorage } from '$src/@types';
 import { calculateStreak } from '$src/utils';
 import { dayjs } from '$src/utils/dayjs';
-import { getDailyMonsterID } from '$src/utils/prng';
+import { getDailyMonster } from '$src/utils/prng';
 
 const dateFormat = 'DDMMYYYY';
 
@@ -25,9 +25,12 @@ export const getGameData = (urlDate: string) => {
     : dayjs.utc();
 
   const dateGameKey = gameDate.format(dateFormat);
+
+  const dailyMonster = getDailyMonster(gameDate);
+
   const data = {
     attempts: state.current[dateGameKey]?.attempts ?? [],
-    correctID: getDailyMonsterID(gameDate),
+    correctID: dailyMonster.id,
     dateGameKey,
     gameDate,
     isPastDate: gameDate.isBefore(dayjs.utc(), 'day'),
@@ -37,6 +40,7 @@ export const getGameData = (urlDate: string) => {
 
   if (process.env.NODE_ENV === 'development') {
     console.log('[DAILY] ', data);
+    console.log('[DAILY] Answer: ', dailyMonster.name);
   }
 
   return data;
@@ -61,7 +65,7 @@ export function handleGuess(gameDate: string, monsterID: number) {
     completedOn: undefined,
   };
 
-  if (monsterID === getDailyMonsterID(dayjs.utc(gameDate))) {
+  if (monsterID === getDailyMonster(dayjs.utc(gameDate)).id) {
     state.current[gameDate].answerID = monsterID;
     state.current[gameDate].completedOn = dayjs.utc().toISOString();
     return true;

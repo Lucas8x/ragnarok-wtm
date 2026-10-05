@@ -9,7 +9,7 @@ export const monsterWithIgnoreFilter = monsters.filter(
 
 export function calculateStreak(dates: Record<string, DailyItemStorage>) {
   const today = dayjs.utc();
-  console.log('Today:', today.format('DD-MM-YYYY'));
+  console.log('[DAILY] Today:', today.format('DD-MM-YYYY'));
 
   let streak = 0;
 
@@ -27,7 +27,7 @@ export function calculateStreak(dates: Record<string, DailyItemStorage>) {
       streak += 1;
     } else {
       console.log(
-        'Streak ended at:',
+        '[DAILY] Streak ended at:',
         dayjs.utc(dateKey, 'DDMMYYYY').format('DD-MM-YYYY')
       );
       break;
