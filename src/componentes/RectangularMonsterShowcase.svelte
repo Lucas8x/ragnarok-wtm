@@ -39,7 +39,7 @@
           onload={() => {
             isLoading = false;
           }}
-          src={`/sprites/${monsterID}.png`}
+          src={`${import.meta.env.BASE_URL}sprites/${monsterID}.png`}
         />
       {/if}
 

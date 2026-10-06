@@ -53,7 +53,7 @@
       class={cn('size-12 object-contain', {
         'opacity-50': isIgnored,
       })}
-      src={`/sprites/${id}.png`}
+      src={`${import.meta.env.BASE_URL}sprites/${id}.png`}
     />
 
     <CardFooter>
