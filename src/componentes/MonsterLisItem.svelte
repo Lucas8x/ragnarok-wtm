@@ -25,15 +25,15 @@
 </script>
 
 <Card
-  class={cn('max-w-40', {
+  class={cn('h-60 max-w-40', {
     'border-2 border-red-500': isDuplicate,
   })}
 >
   <CardContent
-    class={'flex h-full flex-col items-center justify-between gap-2'}
+    class="flex h-full flex-col items-center justify-between gap-2 px-0"
   >
     <CardHeader
-      class={cn('flex flex-col items-center gap-0', {
+      class={cn('flex w-full flex-col items-center gap-0', {
         'opacity-50': isIgnored,
       })}
     >
@@ -45,7 +45,7 @@
       >
         {id}
       </a>
-      <p class="text-center text-balance">{name}</p>
+      <p class="text-center text-balance" hidden={!name}>{name}</p>
     </CardHeader>
 
     <enhanced:img
@@ -56,7 +56,7 @@
       src={`${import.meta.env.BASE_URL}sprites/${id}.png`}
     />
 
-    <CardFooter>
+    <CardFooter hidden={!onToggle}>
       <Button
         class={cn('not-disabled:cursor-pointer', {
           'bg-neo-green': isIgnored,
