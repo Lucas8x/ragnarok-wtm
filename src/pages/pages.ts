@@ -6,18 +6,18 @@ export const PAGES_CONFIG = {
     disabled: false,
   },
 
-  '/connoisseur': {
-    titleID: 'page_title_connoisseur',
-    navbarText: 'Connoisseur',
-    module: () => import('$src/pages/connoisseur.svelte'),
-    disabled: true,
-  },
-
   '/wordle': {
     titleID: 'page_title_wordle',
     navbarText: 'Wordle',
     module: () => import('$src/pages/wordle.svelte'),
     disabled: false,
+  },
+
+  '/connoisseur': {
+    titleID: 'page_title_connoisseur',
+    navbarText: 'Connoisseur',
+    module: () => import('$src/pages/connoisseur.svelte'),
+    disabled: process.env.NODE_ENV !== 'development',
   },
 
   '/custom': {
