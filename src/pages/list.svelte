@@ -1,14 +1,12 @@
 <script lang="ts">
-  import { LoaderCircle } from '@lucide/svelte/icons';
   import { VMasonry } from 'virtua/svelte';
-  import { Button } from '$lib/components/ui/button';
   import Input from '$lib/components/ui/input/input.svelte';
-  import type { Monster } from '$src/@types';
+  import LoadingButton from '$src/componentes/LoadingButton.svelte';
   import MonsterLisItem from '$src/componentes/MonsterLisItem.svelte';
   import monsters from '$src/data/monsters.json';
   import {
+    ignoreIdsFileServer,
     ignoreStore,
-    saveToDisk,
     toggleMonster,
   } from '$src/stores/dev.monster-manager';
   import { groupSameName } from '$src/utils/groupSameName';
@@ -17,7 +15,6 @@
 
   let showAllMonsters = $state(true);
   let searchValue = $state('');
-  let isSavingOnDisk = $state(false);
 
   const ignored = $derived(ignoreStore.current);
 
@@ -44,33 +41,38 @@
       <span>Show all monsters</span>
     </div>
 
-    <Button
-      class="cursor-pointer w-fit disabled:cursor-not-allowed"
-      disabled={isSavingOnDisk}
+    <LoadingButton
       onclick={async () => {
-        isSavingOnDisk = true;
-        const [error] = await saveToDisk();
-        console.error('[Disk-Server] Error: ', error);
-        isSavingOnDisk = false;
+        const error = await ignoreIdsFileServer('POST');
+        if (error) {
+          console.error('[Disk-Server] [POST] Error: ', error);
+        }
       }}
-      type="button"
     >
       Save to disk
-      {#if isSavingOnDisk}
-        <LoaderCircle class="animate-spin" />
-      {/if}
-    </Button>
+    </LoadingButton>
+
+    <LoadingButton
+      onclick={async () => {
+        const error = await ignoreIdsFileServer('GET');
+        if (error) {
+          console.error('[Disk-Server] [GET] Error: ', error);
+        }
+      }}
+    >
+      Restore from disk
+    </LoadingButton>
   </header>
 
   {#if showAllMonsters}
     <VMasonry
       data={filteredMonstersByText}
       gap={8}
-      getKey={(monster: Monster) => monster.id}
+      getKey={(monster: (typeof monsters)[number]) => monster.id}
       lanes={10}
     >
       {#snippet children(
-        monster: Monster
+        monster: (typeof monsters)[number]
       )}
         <MonsterLisItem
           id={monster.id}

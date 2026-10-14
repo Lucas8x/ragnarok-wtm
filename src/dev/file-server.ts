@@ -14,46 +14,61 @@ export function fileServer(): Plugin {
     apply: 'serve',
 
     configureServer(server) {
-      server.middlewares.use('/api/save', async (req, res) => {
-        if (req.method !== 'POST') {
+      server.middlewares.use('/api/ignored-ids', async (req, res) => {
+        if (req.method && !['GET', 'POST'].includes(req.method)) {
           res.statusCode = 405;
           res.end('Method Not Allowed');
           return;
         }
 
-        try {
-          const chunks: Buffer[] = [];
+        if (req.method === 'GET') {
+          try {
+            const currentData = JSON.parse(
+              await readFile(ignoreIdsFilePath, 'utf-8')
+            );
 
-          for await (const chunk of req) {
-            chunks.push(Buffer.from(chunk));
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(
+              JSON.stringify({
+                ids: currentData,
+              })
+            );
+          } catch (error) {
+            console.error('[File-Server] [GET] Error:', error);
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: 'Failed to read file' }));
           }
+        } else if (req.method === 'POST') {
+          try {
+            const chunks: Buffer[] = [];
 
-          const receivedData = JSON.parse(
-            Buffer.concat(chunks).toString('utf8')
-          );
+            for await (const chunk of req) {
+              chunks.push(Buffer.from(chunk));
+            }
 
-          const currentData = JSON.parse(
-            await readFile(ignoreIdsFilePath, 'utf-8')
-          );
+            const receivedData = JSON.parse(
+              Buffer.concat(chunks).toString('utf8')
+            );
 
-          const updatedData = JSON.stringify(
-            [...new Set(currentData.concat(receivedData))].sort(),
-            null,
-            0
-          );
+            await writeFile(
+              ignoreIdsFilePath,
+              JSON.stringify([...new Set(receivedData)].sort()),
+              'utf8'
+            );
 
-          await writeFile(ignoreIdsFilePath, updatedData, 'utf8');
-
-          const response = JSON.stringify({
-            ids: updatedData,
-          });
-
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'application/json');
-          res.end(response);
-        } catch {
-          res.statusCode = 500;
-          res.end(JSON.stringify({ error: 'Failed to save file' }));
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(
+              JSON.stringify({
+                success: true,
+              })
+            );
+          } catch (error) {
+            console.error('[File-Server] [POST] Error:', error);
+            res.statusCode = 500;
+            res.end(JSON.stringify({ error: 'Failed to save file' }));
+          }
         }
       });
     },

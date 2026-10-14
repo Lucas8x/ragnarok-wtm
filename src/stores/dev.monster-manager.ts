@@ -19,31 +19,40 @@ export function toggleMonster(id: number) {
   ignoreStore.current.push(id);
 }
 
-export async function saveToDisk() {
-  const response = await fetch('/api/save', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(ignoreStore.current),
-  });
+export async function ignoreIdsFileServer(
+  type: 'GET' | 'POST'
+): Promise<string | null> {
+  try {
+    const response = await fetch('/api/ignored-ids', {
+      method: type,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: type === 'POST' ? JSON.stringify(ignoreStore.current) : undefined,
+    });
 
-  if (!response.ok) {
-    return ['Request failed.', null];
+    if (!response.ok) {
+      return 'Request failed.';
+    }
+
+    const { error, ids } = await response.json();
+
+    if (error) {
+      return error;
+    }
+
+    if (ids) {
+      if (!Array.isArray(ids)) {
+        return 'Data from server is not an array';
+      }
+      ignoreStore.current = ids;
+    }
+
+    return null;
+  } catch (error) {
+    if (error instanceof Error) {
+      return `Error: ${error.message}`;
+    }
+    return 'Unknow Error';
   }
-
-  const { error, ids } = await response.json();
-
-  if (error) {
-    console.error('[Disk-Server] Error:', error);
-    return [error, null];
-  }
-
-  const parsedIds = JSON.parse(ids);
-  if (!Array.isArray(parsedIds)) {
-    return ['Data from server is not an array', null];
-  }
-
-  ignoreStore.current = parsedIds;
-  return [null, true];
 }
