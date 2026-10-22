@@ -8,6 +8,7 @@
     CommandList,
   } from '$lib/components/ui/command';
   import { monsterWithIgnoreFilter } from '$src/utils';
+  import SpriteCard from './SpriteRender.svelte';
 
   let {
     scored = false,
@@ -36,19 +37,24 @@
       bind:value={search}
     />
 
-    <CommandList
-      class="absolute left-0 right-0 top-full z-1 border border-t-0 bg-white"
-    >
+    <CommandList class="absolute top-full right-0 left-0 z-1 bg-white">
       {#if search.trim().length > 0 && filtered.length > 0}
-        <CommandGroup>
+        <CommandGroup class="neo-border">
           {#each filtered as monster (monster.id)}
-            <CommandItem onSelect={() => onSelect(monster.id)}>
-              <span>{monster.name}</span>
+            <CommandItem
+              class="my-1 pb-2 cursor-pointer hover:bg-orange-100! active:bg-orange-200! aria-selected:bg-orange-100 aria-selected:shadow-shadow"
+              onSelect={() => onSelect(monster.id)}
+            >
+              <div class="border-2 p-2  bg-background shadow-shadow">
+                <SpriteCard monsterID={monster.id} name={monster.name} />
+              </div>
+              <p class="ml-2 font-bold tracking-wide">{monster.name}</p>
+              <!-- TODO: se tiver modo easy mostrar mais detalhes ex: elemento? -->
             </CommandItem>
           {/each}
         </CommandGroup>
       {:else if search.trim().length > 0 && filtered.length === 0}
-        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandEmpty class="neo-border">No results found.</CommandEmpty>
       {/if}
     </CommandList>
   </Command>
