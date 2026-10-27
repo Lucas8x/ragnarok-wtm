@@ -8,7 +8,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["src/**", "!src/lib", "!public", "!src/assets"]
+    "includes": ["src/**", "!src/lib", "!public", "!src/assets", "!src/data"]
   },
   "linter": {
     "rules": {
@@ -35,7 +35,7 @@
         }
       },
       "nursery": {
-        "useSortedClasses": {
+        "useTailwindSortedClasses": {
           "level": "info"
         }
       }
@@ -57,6 +57,9 @@
     "parser": {
       "tailwindDirectives": true
     }
+  },
+  "tailwind": {
+    "stylesheet": "./src/app.css"
   },
   "assist": {
     "enabled": true,
