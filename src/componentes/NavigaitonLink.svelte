@@ -30,7 +30,7 @@
 
 <a
   class={cn(
-    'neo-border px-4 py-1 font-medium text-sm uppercase tracking-wide underline-offset-4 transition ease-in-out hover:shadow-shadow sm:text-base',
+    'neo-border px-4 py-1 text-sm font-medium tracking-wide uppercase underline-offset-4 transition ease-in-out hover:shadow-shadow sm:text-base',
     {
       'bg-white text-black shadow-shadow': $route === href,
       'font-bold': $route === href,

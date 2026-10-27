@@ -15,8 +15,8 @@
   let search = $state('');
 </script>
 
-<div class="w-full flex justify-center pt-4">
-  <div class="flex flex-col items-center gap-6 w-full max-w-xl">
+<div class="flex w-full justify-center pt-4">
+  <div class="flex w-full max-w-xl flex-col items-center gap-6">
     {#if gameData.isPastDate}
       <Card>
         <CardContent class="px-8 text-center">
@@ -29,21 +29,21 @@
     {/if}
 
     <div
-      class="bg-neo-red neo-border shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2"
+      class="neo-border mt-2 inline-flex items-center gap-2 bg-neo-red px-4 py-2 shadow-shadow"
     >
       <Flame
-        className="w-5 h-5"
+        className="h-5 w-5"
         fill={gameData.streak.onFire ? 'red' : 'transparent'}
       />
       <span class="font-bold">STREAK: {gameData.streak.streak}</span>
     </div>
 
     <Card class="w-full">
-      <CardContent class="space-y-4 px-8 text-center">
+      <CardContent class="space-y-4 px-4 text-center sm:px-8">
         <div
-          class="bg-neo-yellow neo-border inline-flex items-center gap-2 px-4 py-2"
+          class="neo-border inline-flex items-center gap-2 bg-neo-yellow px-4 py-2"
         >
-          <Calendar className="w-5 h-5" />
+          <Calendar className="h-5 w-5" />
           <span class="font-bold">Monster of the day</span>
         </div>
 

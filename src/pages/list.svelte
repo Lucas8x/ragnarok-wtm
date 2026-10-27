@@ -30,7 +30,7 @@
 </script>
 
 <div class="mt-4 flex h-full flex-col gap-4">
-  <header class="max-w-2xl space-y-2 self-center flex gap-2 w-full">
+  <header class="flex w-full max-w-2xl gap-2 space-y-2 self-center">
     <Input
       class="disabled:cursor-not-allowed"
       disabled={!showAllMonsters}
@@ -38,7 +38,7 @@
       bind:value={searchValue}
     />
 
-    <div class="flex items-center gap-2 w-96">
+    <div class="flex w-96 items-center gap-2">
       <input type="checkbox" bind:checked={showAllMonsters} />
       <span>Show all monsters</span>
     </div>
@@ -73,9 +73,7 @@
       getKey={(monster: (typeof monsters)[number]) => monster.id}
       lanes={10}
     >
-      {#snippet children(
-        monster: (typeof monsters)[number]
-      )}
+      {#snippet children(monster: (typeof monsters)[number])}
         <MonsterLisItem
           id={monster.id}
           isDuplicate={false}

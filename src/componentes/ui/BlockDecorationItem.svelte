@@ -26,7 +26,7 @@
 
 <div
   class={cn(
-    'repeat-infinite absolute border-3 border-black shadow-shadow ease-in-out',
+    'absolute border-3 border-black shadow-shadow ease-in-out repeat-infinite',
     {
       'bg-white': color === 0,
       'bg-neo-blue': color === 1,

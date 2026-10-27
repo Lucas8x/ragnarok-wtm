@@ -42,10 +42,10 @@
         <CommandGroup class="neo-border">
           {#each filtered as monster (monster.id)}
             <CommandItem
-              class="my-1 pb-2 cursor-pointer hover:bg-orange-100! active:bg-orange-200! aria-selected:bg-orange-100 aria-selected:shadow-shadow"
+              class="my-1 cursor-pointer pb-2 hover:bg-orange-100! active:bg-orange-200! aria-selected:bg-orange-100 aria-selected:shadow-shadow"
               onSelect={() => onSelect(monster.id)}
             >
-              <div class="border-2 p-2  bg-background shadow-shadow">
+              <div class="border-2 bg-background p-2 shadow-shadow">
                 <SpriteCard monsterID={monster.id} name={monster.name} />
               </div>
               <p class="ml-2 font-bold tracking-wide">{monster.name}</p>

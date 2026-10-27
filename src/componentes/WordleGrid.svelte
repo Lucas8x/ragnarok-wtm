@@ -23,7 +23,7 @@
           )}
         >
           <span
-            class={cn('font-bold text-2xl uppercase', {
+            class={cn('text-2xl font-bold uppercase', {
               'text-white': wordleGame.guesses[i]?.submitted,
               'text-black': wordleGame.guesses[i]?.validation[j] === 1,
             })}

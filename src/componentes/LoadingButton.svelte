@@ -11,7 +11,7 @@
 </script>
 
 <Button
-  class="cursor-pointer w-fit disabled:cursor-not-allowed"
+  class="w-fit cursor-pointer disabled:cursor-not-allowed"
   disabled={loading || props.disabled}
   onclick={async () => {
     loading = true;

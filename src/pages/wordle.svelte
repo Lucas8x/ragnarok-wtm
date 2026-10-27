@@ -69,7 +69,7 @@
 
 <main class="flex h-full flex-col items-center gap-1 pt-2">
   <p
-    class="neo-border font-extrabold bg-yellow-400 shadow-shadow mt-2 inline-flex items-center gap-2 px-4 py-2 mb-2"
+    class="neo-border mt-2 mb-2 inline-flex items-center gap-2 bg-yellow-400 px-4 py-2 font-extrabold shadow-shadow"
   >
     {wordleGame.status === 'over'
       ? 'This game is over'

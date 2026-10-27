@@ -5,13 +5,13 @@
 </script>
 
 <div
-  class="w-full h-full line-grid bg-size-[32px_32px] flex flex-col relative overflow-auto"
+  class="line-grid relative flex h-full w-full flex-col overflow-auto bg-size-[32px_32px]"
 >
   {@render children?.()}
 
   <div
     aria-hidden="true"
-    class="absolute inset-0 pointer-events-none overflow-hidden z-[-1]"
+    class="pointer-events-none absolute inset-0 z-[-1] overflow-hidden"
   >
     <BlockDecorationItem side="right" />
     <BlockDecorationItem side="left" />

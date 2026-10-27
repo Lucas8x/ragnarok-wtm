@@ -25,7 +25,7 @@
       {#each row.split(' ') as key}
         <Button
           class={cn(
-            'h-12 w-12 cursor-pointer bg-orange-100 p-0 font-bold text-lg uppercase hover:bg-orange-200 active:bg-orange-300',
+            'h-12 w-12 cursor-pointer bg-orange-100 p-0 text-lg font-bold uppercase hover:bg-orange-200 active:bg-orange-300',
             {
               'flex-auto': key === '{enter}',
               //'sm:flex-2': key === '{bksp}',

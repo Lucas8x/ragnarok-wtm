@@ -1,5 +1,5 @@
 <footer
-  class="flex items-center justify-center border-t border-neutral-500 py-4 text-center mt-8"
+  class="mt-8 flex items-center justify-center border-t border-neutral-500 py-4 text-center"
 >
   <div class="max-w-2xl space-y-1 text-xs">
     <p>
