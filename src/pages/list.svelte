@@ -19,9 +19,13 @@
   const ignored = $derived(ignoreStore.current);
 
   const filteredMonstersByText = $derived(
-    monsters.filter((monster) =>
-      monster.name.toLowerCase().includes(searchValue.toLowerCase())
-    )
+    monsters.filter((monster) => {
+      const loweredSearch = searchValue.toLowerCase();
+      return (
+        monster.name.toLowerCase().includes(loweredSearch) ||
+        monster.aegisName.toLowerCase().includes(loweredSearch)
+      );
+    })
   );
 </script>
 
@@ -30,10 +34,8 @@
     <Input
       class="disabled:cursor-not-allowed"
       disabled={!showAllMonsters}
-      oninput={(e) => {
-        searchValue = e.currentTarget.value;
-      }}
       placeholder="Filter by name"
+      bind:value={searchValue}
     />
 
     <div class="flex items-center gap-2 w-96">
